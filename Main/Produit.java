@@ -11,6 +11,19 @@ public class Produit {
     private Vector <Consommation> listpConsommation = new Vector <Consommation>();
     public Hotel hotel;
 
-    public Produit() {
+    public Produit(int id, String nom, float prixUnit, Hotel hotel) {
+        this.id = id;
+        this.nom = nom;
+        this.prixUnit = prixUnit;
+        this.hotel = hotel;
     }
+
+    public void addType(Type t) {
+        listpProduit.add(t);
+    }
+
+    public void addConsommation(Consommation c) {
+        listpConsommation.add(c);
+    }
+
 }
