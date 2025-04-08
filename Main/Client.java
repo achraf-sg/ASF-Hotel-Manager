@@ -1,20 +1,19 @@
-import java.io.*;
 import java.util.*;
 
 public class Client {
 
-  public int id;
   public String nom;
   public String prenom;
+  public String telephone;
   public String email;
   public boolean isBanned;
   public Vector <Reservation> listReservation = new Vector <Reservation>();
   public Hotel hotel;
   
-  public Client(int id, String nom, String prenom, String email, Hotel hotel) {
-    this.id = id;
+  public Client( String nom, String prenom,String telephone, String email, Hotel hotel) {
     this.nom = nom;
     this.prenom = prenom;
+    this.telephone = telephone;
     this.email = email;
     this.hotel = hotel;
     this.isBanned = false;

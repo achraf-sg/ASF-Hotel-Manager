@@ -7,7 +7,7 @@ public class Main {
         Chambre chambre1 = new Chambre(101, 1, type1, hotel);
         type1.addChambre(chambre1);
         hotel.addChambre(chambre1);
-        Client client1 = new Client(1, "Salah", "Idir", "test@gmail.com", hotel);
+        Client client1 = new Client("Salah", "Idir", "07909149860", "test@gmail.com", hotel);
         hotel.addClient(client1);
         Reservation reservation1 = new Reservation(1, LocalDate.of(2024, 1, 10), LocalDate.of(2024, 1, 20), client1, chambre1);
         client1.addReservation(reservation1);
