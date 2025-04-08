@@ -1,19 +1,22 @@
 public class Employe {
-    public String nom;
-    public String prenom;
-    public String adresse;
-    public String telephone;
-    public String email;
-    public Hotel hotel; 
+    private String nom;
+    private String prenom;
+    private String adresse;
+    private String telephone;
+    private String email;
+    private Hotel hotel; 
+    private String login;
+    private String password;
 
-
-    public Employe(String nom, String prenom, String adresse, String telephone, String email, Hotel hotel) {
+    public Employe(String nom, String prenom, String adresse, String telephone, String email, Hotel hotel, String login, String password) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.telephone = telephone;
         this.email = email;
         this.hotel = hotel; 
+        this.login = login;
+        this.password = password;
     }
 
     // Getters
@@ -35,6 +38,12 @@ public class Employe {
     public Hotel getHotel() {
         return hotel;
     }
+    public String getLogin() {
+        return login;
+    }
+    public String getPassword() {
+        return password;
+    }
 
     // Setters
     public void setNom(String nom) {
@@ -54,6 +63,9 @@ public class Employe {
     }
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+    public void setLogin(String login) {
+        this.login = login;
     }
 
 }

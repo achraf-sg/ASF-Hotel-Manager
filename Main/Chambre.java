@@ -2,18 +2,12 @@ import java.util.*;
 
 public class Chambre {
 
-    public int numero;
-    public int etage;
-    public Vector <Type> listType = new Vector <Type>();
-    public Vector <Reservation> listReservation = new Vector <Reservation>();
-    public Hotel hotel;
-    public Type type;
-
-    public Chambre(int numero, int etage, Type type) {
-        this.numero = numero;
-        this.etage = etage;
-        this.type = type;
-    }
+    private int numero;
+    private int etage;
+    private Vector <Type> listType = new Vector <Type>();
+    private Vector <Reservation> listReservation = new Vector <Reservation>();
+    private Hotel hotel;
+    private Type type;
 
     public Chambre(int numero, int etage, Type type, Hotel hotel) {
         this.numero = numero;
@@ -22,6 +16,41 @@ public class Chambre {
         this.hotel = hotel;
     }
 
+    // Getters
+    public int getNumero() {
+        return numero;
+    }
+    public int getEtage() {
+        return etage;
+    }
+    public Vector <Type> getListType() {
+        return listType;
+    }
+    public Vector <Reservation> getListReservation() {
+        return listReservation;
+    }
+    public Hotel getHotel() {
+        return hotel;
+    }
+    public Type getType() {
+        return type;
+    }
+
+    // Setters
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    public void setEtage(int etage) {
+        this.etage = etage;
+    }
+    public void setType(Type type) {
+        this.type = type;
+    }
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    // Add methods
     public void addType(Type t) {
         listType.add(t);
     }
