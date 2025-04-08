@@ -1,15 +1,13 @@
-
-import java.io.*;
 import java.util.*;
 
 public class Produit {
 
-    public int id;
-    public String nom;
-    public float prixUnit;
+    private int id;
+    private String nom;
+    private float prixUnit;
     private Vector <Type> listpProduit = new Vector <Type>();
     private Vector <Consommation> listpConsommation = new Vector <Consommation>();
-    public Hotel hotel;
+    private Hotel hotel;
 
     public Produit(int id, String nom, float prixUnit, Hotel hotel) {
         this.id = id;
@@ -17,6 +15,41 @@ public class Produit {
         this.prixUnit = prixUnit;
         this.hotel = hotel;
     }
+
+    // Getters
+    public int getId() {
+        return id;
+    }
+    public String getNom() {
+        return nom;
+    }
+    public float getPrixUnit() {
+        return prixUnit;
+    }
+    public Vector <Type> getListpProduit() {
+        return listpProduit;
+    }
+    public Vector <Consommation> getListpConsommation() {
+        return listpConsommation;
+    }
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public void setPrixUnit(float prixUnit) {
+        this.prixUnit = prixUnit;
+    }
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
 
     public void addType(Type t) {
         listpProduit.add(t);
