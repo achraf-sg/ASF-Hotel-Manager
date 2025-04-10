@@ -2,12 +2,12 @@ import java.util.*;
 
 public class Hotel {
 
-    public String nom;
-    public String adresse;
-    public Vector <Client> listClient = new Vector <Client>();
-    public Vector <Chambre> listCham = new Vector<Chambre>();
-    public Vector <Produit> listProd = new Vector<Produit>();
-    public Vector <Employe> listEmp = new Vector<Employe>();
+    private String nom;
+    private String adresse;
+    private Vector <Client> listClient = new Vector <Client>();
+    private Vector <Chambre> listCham = new Vector<Chambre>();
+    private Vector <Produit> listProd = new Vector<Produit>();
+    private Vector <Employe> listEmp = new Vector<Employe>();
 
     public Hotel(String nom, String adresse) {
         this.nom = nom;
