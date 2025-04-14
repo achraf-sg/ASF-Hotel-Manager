@@ -10,7 +10,7 @@ public class Chambre {
     private Vector <Reservation> listReservation = new Vector <Reservation>();
     private Hotel hotel;
     private Type type;
-
+   private  boolean isAvailable = true;
     public Chambre(int numero, int etage, Type type, Hotel hotel) {
         this.numero = numero;
         this.etage = etage;

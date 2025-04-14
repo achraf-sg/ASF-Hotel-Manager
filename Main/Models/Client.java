@@ -11,8 +11,10 @@ public class Client {
   private boolean isBanned;
   private Vector <Reservation> listReservation = new Vector <Reservation>();
   private Hotel hotel;
-  
+  private int idClient;
+  private static int idCounter = 0; 
   public Client( String nom, String prenom,String telephone, String email, Hotel hotel) {
+   this.idClient = idCounter++;
     this.nom = nom;
     this.prenom = prenom;
     this.telephone = telephone;
