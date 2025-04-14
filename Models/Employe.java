@@ -1,4 +1,7 @@
 public class Employe {
+    public static int count = 0;
+
+    private int id;
     private String nom;
     private String prenom;
     private String adresse;
@@ -9,6 +12,7 @@ public class Employe {
     private String password;
 
     public Employe(String nom, String prenom, String adresse, String telephone, String email, Hotel hotel, String login, String password) {
+        this.id = count++;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -20,6 +24,9 @@ public class Employe {
     }
 
     // Getters
+    public int getId() {
+        return id;
+    }
     public String getNom() {
         return nom;
     }
@@ -46,6 +53,9 @@ public class Employe {
     }
 
     // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setNom(String nom) {
         this.nom = nom;
     }

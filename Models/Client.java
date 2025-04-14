@@ -2,6 +2,9 @@ import java.util.*;
 
 public class Client {
 
+  public static int counter = 0;
+
+  private int id;
   private String nom;
   private String prenom;
   private String telephone;
@@ -10,7 +13,8 @@ public class Client {
   private Vector <Reservation> listReservation = new Vector <Reservation>();
   private Hotel hotel;
   
-  public Client( String nom, String prenom,String telephone, String email, Hotel hotel) {
+  public Client(String nom, String prenom,String telephone, String email, Hotel hotel) {
+    this.id = counter++;
     this.nom = nom;
     this.prenom = prenom;
     this.telephone = telephone;
@@ -20,6 +24,10 @@ public class Client {
   }
 
   // Getters
+
+  public int getId() {
+    return id;
+  }
   public String getNom() {
     return nom;
   }
@@ -43,6 +51,9 @@ public class Client {
   }
 
   // Setters
+  public void setId(int id) {
+    this.id = id;
+  }
   public void setNom(String nom) {
     this.nom = nom;
   }

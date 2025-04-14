@@ -1,14 +1,15 @@
 import java.util.*;
 
 public class Sejour {
+    public static int count = 0;
 
     private int id;
     private boolean status;
     private Vector <Consommation> listConsommation = new Vector <Consommation>();
     private Reservation res;
 
-    public Sejour(int id, boolean status, Reservation res) {
-        this.id = id;
+    public Sejour(boolean status, Reservation res) {
+        this.id = count++;
         this.status = status;
         this.res = res;
     }

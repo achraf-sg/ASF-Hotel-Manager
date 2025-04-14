@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 public class Reservation {
+    public static int count = 0;
 
     private int id;
     private LocalDate dateDeb;
@@ -7,8 +8,8 @@ public class Reservation {
     private Client client;
     private Chambre chambre;
 
-    public Reservation(int id, LocalDate dateDeb, LocalDate dateFin, Client client, Chambre chambre) {
-        this.id = id;
+    public Reservation(LocalDate dateDeb, LocalDate dateFin, Client client, Chambre chambre) {
+        this.id = count++;
         this.dateDeb = dateDeb;
         this.dateFin = dateFin;
         this.client = client;
