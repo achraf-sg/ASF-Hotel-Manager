@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Produit {
+    public static int count = 0;
 
     private int id;
     private String nom;
@@ -9,8 +10,8 @@ public class Produit {
     private Vector <Consommation> listpConsommation = new Vector <Consommation>();
     private Hotel hotel;
 
-    public Produit(int id, String nom, float prixUnit, Hotel hotel) {
-        this.id = id;
+    public Produit(String nom, float prixUnit, Hotel hotel) {
+        this.id = count++;
         this.nom = nom;
         this.prixUnit = prixUnit;
         this.hotel = hotel;

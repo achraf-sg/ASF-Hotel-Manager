@@ -2,13 +2,14 @@ import java.util.*;
 
 public class Consommation {
 
+    public static int counter = 0;
     private int id;
     private int quantite;
     private Vector <Produit> listProduit = new Vector <Produit>();
     private Sejour sejour;
 
-    public Consommation(int id, int quantite, Sejour sejour) {
-        this.id = id;
+    public Consommation(int quantite, Sejour sejour) {
+        this.id = counter++;
         this.quantite = quantite;
         this.sejour = sejour;
     }
