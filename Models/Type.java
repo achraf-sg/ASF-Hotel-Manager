@@ -1,18 +1,29 @@
+package Models;
+
 import java.util.*;
 
 public class Type {
 
-  private String type;
+  // Enum for predefined room types
+  public enum RoomType {
+    SINGLE,
+    DOUBLE,
+    SUITE,
+    DELUXE
+  }
+
+  private RoomType type; // Corrected from RppmType to RoomType
   private float prix;
   private Vector<Chambre> listChambre = new Vector<Chambre>();
 
-  public Type(String type, float prix) {
+  // Constructor
+  public Type(RoomType type, float prix) {
     this.type = type;
     this.prix = prix;
   }
 
   // Getters
-  public String getType() {
+  public RoomType getType() {
     return type;
   }
   public float getPrix() {
@@ -23,7 +34,7 @@ public class Type {
   }
 
   // Setters
-  public void setType(String type) {
+  public void setType(RoomType type) {
     this.type = type;
   }
   public void setPrix(float prix) {
@@ -34,5 +45,4 @@ public class Type {
   public void addChambre(Chambre c) {
     listChambre.add(c);
   }
-  
 }
