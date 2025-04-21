@@ -27,4 +27,5 @@ public class EmployeController {
         JOptionPane.showMessageDialog(null, "Welcome to Employee Dashboard", "Employee Access", JOptionPane.INFORMATION_MESSAGE);
         // Implement employee dashboard here
     }
+
 }
