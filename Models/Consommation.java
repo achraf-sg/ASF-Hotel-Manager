@@ -1,15 +1,16 @@
+package Models;
+
 import java.util.*;
 
 public class Consommation {
 
-    public static int counter = 0;
     private int id;
     private int quantite;
     private Vector <Produit> listProduit = new Vector <Produit>();
     private Sejour sejour;
 
-    public Consommation(int quantite, Sejour sejour) {
-        this.id = counter++;
+    public Consommation(int id, int quantite, Sejour sejour) {
+        this.id = id;
         this.quantite = quantite;
         this.sejour = sejour;
     }
@@ -43,4 +44,17 @@ public class Consommation {
     public void addProduit(Produit p) {
         listProduit.add(p);
     }
+    public void removeProduit(Produit p) {
+        listProduit.remove(p);
+    }
+    public void removeProduitByName(String name) {
+        for (Produit p : listProduit) {
+            if (p.getNom().equalsIgnoreCase(name)) {
+                listProduit.remove(p);
+                break;
+            }
+        }
+    }
+
+    
 }

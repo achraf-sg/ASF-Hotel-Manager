@@ -1,7 +1,8 @@
-public class Employe {
-    public static int count = 0;
+package Models;
 
+public class Employe {
     private int id;
+    private static int idCounter = 0;
     private String nom;
     private String prenom;
     private String adresse;
@@ -11,22 +12,19 @@ public class Employe {
     private String login;
     private String password;
 
-    public Employe(String nom, String prenom, String adresse, String telephone, String email, Hotel hotel, String login, String password) {
-        this.id = count++;
+    public Employe(String nom, String prenom, String adresse, String telephone, String email, Hotel hotel,  String password) {
+       this.id = ++idCounter; 
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.telephone = telephone;
         this.email = email;
         this.hotel = hotel; 
-        this.login = login;
+        
         this.password = password;
     }
 
     // Getters
-    public int getId() {
-        return id;
-    }
     public String getNom() {
         return nom;
     }
@@ -45,17 +43,12 @@ public class Employe {
     public Hotel getHotel() {
         return hotel;
     }
-    public String getLogin() {
-        return login;
-    }
+  
     public String getPassword() {
         return password;
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -74,8 +67,8 @@ public class Employe {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
-    public void setLogin(String login) {
-        this.login = login;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
