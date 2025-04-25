@@ -49,11 +49,32 @@ public class Hotel {
     public void addChambre(Chambre c) {
         listCham.add(c);
     }
+
+    public void modifyChamStatus(int num, int etage) {
+        for (Chambre ch : listCham) {
+            if(ch.getNumero() == num && ch.getEtage() == etage) {
+                ch.changeCleanStatus();
+            }
+        }
+    }
+
+    public void delChambre(Chambre c) {
+        listCham.remove(c);
+    }
+    
     public void addProduit(Produit p) {
         listProd.add(p);
     }
+
+    public void delProduit(Produit p) {
+        listProd.remove(p);
+    }
+
     public void addEmploye(Employe e) {
         listEmp.add(e);
     }
 
+    public void delEmploye(Employe e) {
+        listEmp.remove(e);
+    }
 }

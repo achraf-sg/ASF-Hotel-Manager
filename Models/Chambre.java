@@ -8,6 +8,7 @@ public class Chambre {
     private Vector <Reservation> listReservation = new Vector <Reservation>();
     private Hotel hotel;
     private Type type;
+    private boolean isClean = true;
 
     public Chambre(int numero, int etage, Type type, Hotel hotel) {
         this.numero = numero;
@@ -36,6 +37,10 @@ public class Chambre {
         return type;
     }
 
+    public boolean getisClean() {
+        return isClean;
+    }
+
     // Setters
     public void setNumero(int numero) {
         this.numero = numero;
@@ -59,4 +64,7 @@ public class Chambre {
         listReservation.add(r);
     }
 
+    public void changeCleanStatus() {
+        isClean = !isClean;
+    }
 }
