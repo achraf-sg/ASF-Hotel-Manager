@@ -1,3 +1,5 @@
+package Models;
+
 import java.util.*;
 
 public class Consommation {
@@ -42,4 +44,17 @@ public class Consommation {
     public void addProduit(Produit p) {
         listProduit.add(p);
     }
+    public void removeProduit(Produit p) {
+        listProduit.remove(p);
+    }
+    public void removeProduitByName(String name) {
+        for (Produit p : listProduit) {
+            if (p.getNom().equalsIgnoreCase(name)) {
+                listProduit.remove(p);
+                break;
+            }
+        }
+    }
+
+    
 }

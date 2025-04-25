@@ -1,27 +1,41 @@
+package Models;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Admin extends Employe {
 
-    public Admin(String nom, String prenom, String adresse, String telephone, String email, Hotel hotel, String login, String password) {
-        super(nom, prenom, adresse, telephone, email, hotel, login, password);
-    }
-    // methods for rooms
-    public void addChambre(int numero, int etage, Type type) {
-        Chambre newChambre = new Chambre(numero, etage, type, super.getHotel());
-        super.getHotel().addChambre(newChambre);
+    public Admin(String nom, String prenom, String adresse, String telephone, String email, Hotel hotel,  String password) {
+        super(nom, prenom, adresse, telephone, email, hotel,  password);
     }
 
-    public void delChambre(Chambre c) {
-        super.getHotel().delChambre(c);
+    // Authenticate admin
+    public boolean authenticate(String email, String password) {
+        return this.getEmail().equals(email) && this.getPassword().equals(password);
     }
 
-    public void modifyChamStatus(int num, int etage) {
-        super.getHotel().modifyChamStatus(num, etage);
-    }
-    //methods for employees
-    public void addEmploye(Employe e) {
-        super.getHotel().addEmploye(e);//////////////////////////////////////
+    // Show admin dashboard
+    public void showDashboard() {
+        JOptionPane.showMessageDialog(null, "Welcome to Admin Dashboard", "Admin Access", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void delEmploye(Employe e) {
-        super.getHotel().delEmploye(e);
+    // ActionListener for login
+    public ActionListener getLoginActionListener(JTextField emailField, JPasswordField passwordField, Hotel hotel) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String email = emailField.getText();
+                String password = new String(passwordField.getPassword());
+
+                for (Employe emp : hotel.getListEmp()) {
+                    if (emp instanceof Admin && ((Admin) emp).authenticate(email, password)) {
+                        showDashboard();
+                        return;
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        };
     }
 }
