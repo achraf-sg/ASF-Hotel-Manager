@@ -9,22 +9,23 @@ public class Employe {
     private String telephone;
     private String email;
     private Hotel hotel; 
-    private String login;
     private String password;
 
     public Employe(String nom, String prenom, String adresse, String telephone, String email, Hotel hotel,  String password) {
-       this.id = ++idCounter; 
+        this.id = ++idCounter; 
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.telephone = telephone;
         this.email = email;
         this.hotel = hotel; 
-        
         this.password = password;
     }
 
     // Getters
+    public int getId() {
+        return id;
+    }
     public String getNom() {
         return nom;
     }
@@ -49,6 +50,9 @@ public class Employe {
     }
 
     // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setNom(String nom) {
         this.nom = nom;
     }
