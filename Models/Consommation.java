@@ -1,5 +1,4 @@
 package Models;
-
 import java.util.*;
 
 public class Consommation {

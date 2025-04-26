@@ -1,10 +1,7 @@
-// DataInitializer.java
 package Models;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import Models.*;
 public class DataInitializer {
     public static Hotel initializeHotel() {
         Hotel hotel = new Hotel("Grand Hotel", "123 Main Street");

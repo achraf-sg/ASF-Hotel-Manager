@@ -2,9 +2,10 @@ package Models;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Observable;
 import java.util.Vector;
 
-public class Sejour {
+public class Sejour extends Observable{
 
     private int id;
     private boolean status;

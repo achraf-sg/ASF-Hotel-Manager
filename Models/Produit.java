@@ -2,7 +2,7 @@ package Models;
 
 import java.util.*;
 
-public class Produit {
+public class Produit extends Observable{
 
     private int id;
     private String nom;
