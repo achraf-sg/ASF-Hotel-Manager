@@ -1,8 +1,7 @@
 package Models;
-
 import java.util.*;
 
-public class Chambre {
+public class Chambre extends Observable{
 
     private int numero;
     private int etage;
@@ -11,8 +10,7 @@ public class Chambre {
     private Hotel hotel;
     private Type type;
     private boolean isClean = true;
-
-   private  boolean isAvailable = true;
+    private  boolean isAvailable = true;
     public Chambre(int numero, int etage, Type type, Hotel hotel) {
         this.numero = numero;
         this.etage = etage;
@@ -73,7 +71,5 @@ public boolean isAvailable() {
         this.isAvailable = isAvailable;
     }
 
-    public void changeCleanStatus() {
-        isClean = !isClean;
-    }
+
 }

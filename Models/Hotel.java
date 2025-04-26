@@ -3,7 +3,7 @@ package Models;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Hotel {
+public class Hotel extends Observable{
 
     private String nom;
     private String adresse;
@@ -96,46 +96,7 @@ public class Hotel {
         this.adresse = adresse;
     }
 
-    // Add methods
-    public void addClient(Client c) {
-        listClient.add(c);
-    }
-
-    public void addChambre(Chambre c) {
-        listCham.add(c);
-    }
-
-    public void modifyChamStatus(int num, int etage) {
-        for (Chambre ch : listCham) {
-            if(ch.getNumero() == num && ch.getEtage() == etage) {
-                ch.changeCleanStatus();
-            }
-        }
-    }
-
-    public void delChambre(Chambre c) {
-        listCham.remove(c);
-    }
     
-    public void addProduit(Produit p) {
-        listProd.add(p);
-    }
-
-    public void delProduit(Produit p) {
-        listProd.remove(p);
-    }
-
-    public void addEmploye(Employe e) {
-        listEmp.add(e);
-    }
-
-    public void delEmploye(Employe e) {
-        listEmp.remove(e);
-    }
-    public void addReservation(Reservation r) {
-        listRes.add(r);
-    }
-
     /**
      * Prepares the data for the JTable.
      */
@@ -175,4 +136,77 @@ public class Hotel {
 
         return data;
     }
+
+        // Employee methods
+        public void addEmployee(Employe employe) {
+            getListEmp().add(employe);
+            setChanged();
+            notifyObservers("Employé ajouté");
+        }
+    
+        public void deleteEmployee(int employeeId) {
+            Employe empToRemove = null;
+            for (Employe emp : getListEmp()) {
+                if (emp.getId() == employeeId) {
+                    empToRemove = emp;
+                    break;
+                }
+            }
+            if (empToRemove != null) {
+                getListEmp().remove(empToRemove);
+                setChanged();
+                notifyObservers("Employé Supprimé");
+            }
+        }
+    
+        public void updateEmployee(int id, String nom, String email, String telephone, String adresse, String password) {
+            for (Employe emp : getListEmp()) {
+                if (emp.getId() == id) {
+                    if (nom != null) emp.setNom(nom);
+                    if (email != null) emp.setEmail(email);
+                    if (telephone != null) emp.setTelephone(telephone);
+                    if (adresse != null) emp.setAdresse(adresse);
+                    if (password != null) emp.setPassword(password);
+        
+                    setChanged();
+                    notifyObservers("Employé Modifié"); 
+                    return;
+                }
+            }
+        }
+    
+        public Employe findEmployeeById(int employeeId) {
+            for (Employe emp : getListEmp()) {
+                if (emp.getId() == employeeId) {
+                    return emp;
+                }
+            }
+            return null;
+        }
+    
+        // Chambre methods
+    
+        public void addChambre(int numero, int etage, Type type) {
+            Chambre chambre = new Chambre(numero, etage, type, this);
+            listCham.add(chambre);
+            setChanged();
+            notifyObservers(chambre);
+        }
+    
+        public void deleteChambre(int numero, int etage) {
+            Chambre toRemove = null;
+        
+            for (Chambre c : listCham) {
+                if (c.getNumero() == numero && c.getEtage() == etage) {
+                    toRemove = c;
+                    break;
+                }
+            }
+        
+            if (toRemove != null) {
+                listCham.remove(toRemove);
+                setChanged();
+                notifyObservers();
+            }
+        }
 }

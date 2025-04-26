@@ -1,7 +1,6 @@
 package Tests;
-
-import Models.*;
 import Controller.*;
+import Models.*;
 
 public class ControllerTest {
     public static void main(String[] args) {

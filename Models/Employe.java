@@ -1,6 +1,8 @@
 package Models;
 
-public class Employe {
+import java.util.Observable;
+
+public class Employe extends Observable{
     private int id;
     private static int idCounter = 0;
     private String nom;
