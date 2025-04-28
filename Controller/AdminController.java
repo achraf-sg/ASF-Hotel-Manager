@@ -36,6 +36,7 @@ public class AdminController {
         JOptionPane.showMessageDialog(null, "Employee added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
+
     public void deleteEmployee(int employeeId) {
         Employe empToRemove = null;
         for (Employe emp : hotel.getListEmp()) {
@@ -74,4 +75,6 @@ public class AdminController {
         JOptionPane.showMessageDialog(null, "Employee not found.", "Error", JOptionPane.ERROR_MESSAGE);
         return null;
     }
+
+
 }

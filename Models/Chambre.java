@@ -10,7 +10,8 @@ public class Chambre {
     private Vector <Reservation> listReservation = new Vector <Reservation>();
     private Hotel hotel;
     private Type type;
-   private  boolean isAvailable = true;
+    private  boolean isClean = true;
+    private boolean isAvailable = true; 
     public Chambre(int numero, int etage, Type type, Hotel hotel) {
         this.numero = numero;
         this.etage = etage;
@@ -37,9 +38,13 @@ public class Chambre {
     public Type getType() {
         return type;
     }
-public boolean isAvailable() {
+    public boolean isClean() {
+        return isClean;
+    }
+    public boolean isAvailable() {
         return isAvailable;
     }
+
     // Setters
     public void setNumero(int numero) {
         this.numero = numero;
@@ -52,7 +57,7 @@ public boolean isAvailable() {
     }
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
-    }
+    } 
 
     // Add methods
     public void addType(Type t) {
@@ -64,6 +69,9 @@ public boolean isAvailable() {
     }
     public void setAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+    public void changeCleanStatus(boolean isClean) {
+        this.isClean = isClean;
     }
 
 }
