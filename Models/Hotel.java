@@ -183,6 +183,15 @@ public class Hotel extends Observable{
             }
             return null;
         }
+
+        public Employe findEmployeeByEmail(String email) {
+            for (Employe emp : getListEmp()) {
+                if (emp.getEmail().equalsIgnoreCase(email)) {
+                    return emp;
+                }
+            }
+            return null;
+        }
     
         // Chambre methods
     

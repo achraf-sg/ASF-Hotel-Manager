@@ -17,9 +17,9 @@ public class AdminController {
     private Hotel model;
     private Admin admin;
 
-    public AdminController(Hotel model, Admin admin, AdminHomePage view) {
-        this.model = model;
-        this.admin = admin;
+    public AdminController(Hotel Hmodel, Admin Aadmin, AdminHomePage view) {
+        this.model = Hmodel;
+        this.admin = Aadmin;
         this.view = view;
 
         // bouton "ajouter"
