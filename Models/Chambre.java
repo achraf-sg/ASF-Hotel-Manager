@@ -1,8 +1,7 @@
 package Models;
-
 import java.util.*;
 
-public class Chambre {
+public class Chambre extends Observable{
 
     private int numero;
     private int etage;
@@ -10,8 +9,8 @@ public class Chambre {
     private Vector <Reservation> listReservation = new Vector <Reservation>();
     private Hotel hotel;
     private Type type;
-    private  boolean isClean = true;
-    private boolean isAvailable = true; 
+    private boolean isClean = true;
+    private  boolean isAvailable = true;
     public Chambre(int numero, int etage, Type type, Hotel hotel) {
         this.numero = numero;
         this.etage = etage;
@@ -38,10 +37,12 @@ public class Chambre {
     public Type getType() {
         return type;
     }
+
     public boolean isClean() {
         return isClean;
     }
-    public boolean isAvailable() {
+
+public boolean isAvailable() {
         return isAvailable;
     }
 
@@ -73,5 +74,6 @@ public class Chambre {
     public void changeCleanStatus(boolean isClean) {
         this.isClean = isClean;
     }
+
 
 }

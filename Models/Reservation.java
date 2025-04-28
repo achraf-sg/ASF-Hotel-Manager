@@ -1,8 +1,9 @@
 package Models;
 
 import java.time.LocalDate;
+import java.util.Observable;
 
-public class Reservation {
+public class Reservation extends Observable{
 
     private int id;
     private LocalDate dateDeb;

@@ -1,7 +1,6 @@
 package Tests;
-
-import Models.*;
 import Controller.*;
+import Models.*;
 
 public class ControllerTest {
     public static void main(String[] args) {
@@ -33,7 +32,7 @@ public class ControllerTest {
         System.out.println("Find Employee: " + (foundEmployee != null ? "Passed" : "Failed"));
 
         // Test EmployeController
-        EmployeController employeController = new EmployeController(hotel);
+        LoginController employeController = new LoginController(hotel);
         System.out.println("Testing EmployeController...");
         boolean isEmployeeAuthenticated = employeController.authenticateEmploye("employee@hotel.com", "emp123");
         System.out.println("Employee Authentication: " + (isEmployeeAuthenticated ? "Passed" : "Failed"));

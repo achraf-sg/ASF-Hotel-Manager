@@ -1,5 +1,4 @@
 package Models;
-
 import java.util.*;
 
 public class Type {
@@ -12,7 +11,7 @@ public class Type {
     DELUXE
   }
 
-  private RoomType type; // Corrected from RppmType to RoomType
+  private RoomType type; 
   private float prix;
   private Vector<Chambre> listChambre = new Vector<Chambre>();
 

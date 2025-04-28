@@ -5,5 +5,4 @@ import Models.*;
 
 class ReservationController {
 
-    
 }
