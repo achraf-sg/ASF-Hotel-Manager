@@ -8,7 +8,7 @@ public class ControllerTest {
         Hotel hotel = DataInitializer.initializeHotel();
 
         // Test AdminController
-        AdminController adminController = new AdminController(hotel);
+        AdminEmployeeController adminController = new AdminEmployeeController(hotel);
         System.out.println("Testing AdminController...");
         boolean isAuthenticated = adminController.authenticateAdmin("admin@hotel.com", "admin123");
         System.out.println("Admin Authentication: " + (isAuthenticated ? "Passed" : "Failed"));

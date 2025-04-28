@@ -6,7 +6,7 @@ import Models.Hotel;
 import Models.Menage;
 import Models.Reception;
 import View.LoginPage;
-import View.AdminHomePage;
+import View.AdminEmployeePage;
 import View.ReceptionHomePage;
 import View.MenageHomePage;
 
@@ -51,8 +51,8 @@ public class LoginController {
 
         /*// Redirection selon le rôle
         if (emp instanceof Admin) {
-            AdminHomePage adminPage = new AdminHomePage();
-            new AdminController(model, (Admin) emp, adminPage);
+            AdminEmployeePage adminPage = new AdminEmployeePage();
+            new AdminEmployeeController(model, (Admin) emp, adminPage);
             adminPage.setVisible(true);
             view.dispose();
         } else if (emp instanceof Reception) {
