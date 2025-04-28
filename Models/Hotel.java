@@ -136,7 +136,13 @@ public class Hotel extends Observable{
 
         return data;
     }
-
+    public void addClient(Client client) {
+        listClient.add(client);
+    }
+       public void addChambre(Chambre chambre) {
+        listCham.add(chambre);
+        
+       }
         // Employee methods
         public void addEmployee(Employe employe) {
             getListEmp().add(employe);
