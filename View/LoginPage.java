@@ -15,150 +15,47 @@ public class LoginPage extends JFrame {
     public LoginPage(Hotel hotel) {
         setTitle("Login Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Set the window to full screen
+        setSize(450, 300);
+        setLocationRelativeTo(null); // Centre la fenêtre à l'écran
         setLayout(new BorderLayout());
 
-        // Load the Kaisei Tokumin font
-        Font kaiseiFont = null;
-        try {
-            kaiseiFont = Font.createFont(Font.TRUETYPE_FONT, new File("Ressources/fonts/KaiseiTokumin-Regular.ttf")).deriveFont(20f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(kaiseiFont);
-        } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
-            kaiseiFont = new Font("SansSerif", Font.BOLD, 20); // Fallback font
-        }
+        // Titre
+        JLabel titleLabel = new JLabel("Connexion à l'Hôtel");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(titleLabel, BorderLayout.NORTH);
 
-        // Left Blue Panel
-        JPanel leftPanel = new JPanel();
-        leftPanel.setBackground(new Color(37, 99, 235));
-        leftPanel.setPreferredSize(new Dimension(550, 700));
-        add(leftPanel, BorderLayout.WEST);
-
-        // Right Panel (Login Form)
-        JPanel rightPanel = new JPanel();
-        rightPanel.setBackground(Color.WHITE);
-        rightPanel.setLayout(new GridBagLayout());
-        add(rightPanel, BorderLayout.CENTER);
-
+        // Formulaire
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Logo
-        ImageIcon logoIcon = new ImageIcon("Ressources/logo.png");
-        Image scaledLogo = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        JLabel logo = new JLabel(new ImageIcon(scaledLogo));
+        emailField = new JTextField(20);
+        passwordField = new JPasswordField(20);
+        loginButton = new JButton("Se connecter");
+
         gbc.gridx = 0;
         gbc.gridy = 0;
-        rightPanel.add(logo, gbc);
+        formPanel.add(new JLabel("Email:"), gbc);
 
-        // Title
-        JLabel title = new JLabel("Log in to your Account", SwingConstants.LEFT);
-        title.setFont(kaiseiFont.deriveFont(Font.BOLD, 30f));
-        gbc.gridy++;
-        gbc.insets = new Insets(10, 10, 2, 10);
-        rightPanel.add(title, gbc);
+        gbc.gridx = 1;
+        formPanel.add(emailField, gbc);
 
-        // Subtitle
-        JLabel subtitle = new JLabel("Welcome Back!", SwingConstants.LEFT);
-        subtitle.setFont(kaiseiFont.deriveFont(Font.PLAIN, 20f));
-        subtitle.setForeground(new Color(100, 100, 100));
-        gbc.gridy++;
-        gbc.insets = new Insets(2, 10, 50, 10);
-        rightPanel.add(subtitle, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formPanel.add(new JLabel("Mot de passe:"), gbc);
 
-        // Username Field with Icon
-        JPanel usernamePanel = new JPanel(new BorderLayout());
-        usernamePanel.setPreferredSize(new Dimension(300, 40));
-        usernamePanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        usernamePanel.setBackground(new Color(230, 230, 230));
+        gbc.gridx = 1;
+        formPanel.add(passwordField, gbc);
 
-        ImageIcon userIcon = new ImageIcon("Ressources/icons/utilisateur.png");
-        JLabel userLabel = new JLabel(userIcon);
-        userLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+        add(formPanel, BorderLayout.CENTER);
 
-        usernameField = new JTextField("Username");
-        usernameField.setBorder(BorderFactory.createEmptyBorder());
-        usernameField.setForeground(Color.GRAY);
-        usernameField.setBackground(new Color(230, 230, 230));
-        usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent e) {
-                if (usernameField.getText().equals("Username")) {
-                    usernameField.setText("");
-                    usernameField.setForeground(Color.BLACK);
-                }
-            }
-
-            @Override
-            public void focusLost(java.awt.event.FocusEvent e) {
-                if (usernameField.getText().isEmpty()) {
-                    usernameField.setText("Username");
-                    usernameField.setForeground(Color.GRAY);
-                }
-            }
-        });
-
-        usernamePanel.add(userLabel, BorderLayout.WEST);
-        usernamePanel.add(usernameField, BorderLayout.CENTER);
-        gbc.gridy++;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        rightPanel.add(usernamePanel, gbc);
-
-        // Password Field with Icon
-        JPanel passwordPanel = new JPanel(new BorderLayout());
-        passwordPanel.setPreferredSize(new Dimension(300, 40));
-        passwordPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        passwordPanel.setBackground(new Color(230, 230, 230));
-
-        ImageIcon passwordIcon = new ImageIcon("Ressources/icons/fermer-a-cle.png");
-        JLabel passwordLabel = new JLabel(passwordIcon);
-        passwordLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-
-        passwordField = new JPasswordField("Password");
-        passwordField.setBorder(BorderFactory.createEmptyBorder());
-        passwordField.setForeground(Color.GRAY);
-        passwordField.setBackground(new Color(230, 230, 230));
-        passwordField.setEchoChar((char) 0);
-        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent e) {
-                if (String.valueOf(passwordField.getPassword()).equals("Password")) {
-                    passwordField.setText("");
-                    passwordField.setForeground(Color.BLACK);
-                    passwordField.setEchoChar('•');
-                }
-            }
-
-            @Override
-            public void focusLost(java.awt.event.FocusEvent e) {
-                if (String.valueOf(passwordField.getPassword()).isEmpty()) {
-                    passwordField.setText("Password");
-                    passwordField.setForeground(Color.GRAY);
-                    passwordField.setEchoChar((char) 0);
-                }
-            }
-        });
-
-        passwordPanel.add(passwordLabel, BorderLayout.WEST);
-        passwordPanel.add(passwordField, BorderLayout.CENTER);
-        gbc.gridy++;
-        rightPanel.add(passwordPanel, gbc);
-
-        // Login Button
-        loginButton = new JButton("Log in");
-        loginButton.setPreferredSize(new Dimension(300, 40));
-        loginButton.setBackground(new Color(0, 90, 255));
-        loginButton.setForeground(Color.WHITE);
-        loginButton.setFocusPainted(false);
-        loginButton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-
-        gbc.gridy++;
-        rightPanel.add(loginButton, gbc);
-
-        // Initialize LoginController
-        LoginController loginController = new LoginController(hotel, this);
+        // Bouton login centré
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(loginButton);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     // Getters for LoginController

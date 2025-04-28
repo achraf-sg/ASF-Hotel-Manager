@@ -39,7 +39,7 @@ public class DataInitializer {
 
         // Add all employees to the hotel
         for (Employe employee : employees) {
-            hotel.addEmploye(employee);
+            hotel.addEmployee(employee);
         }
 
         // Create a list of clients
