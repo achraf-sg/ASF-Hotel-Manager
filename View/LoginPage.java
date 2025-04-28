@@ -32,7 +32,7 @@ public class LoginPage extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        emailField = new JTextField(20);
+        usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
         loginButton = new JButton("Se connecter");
 
@@ -41,7 +41,7 @@ public class LoginPage extends JFrame {
         formPanel.add(new JLabel("Email:"), gbc);
 
         gbc.gridx = 1;
-        formPanel.add(emailField, gbc);
+        formPanel.add(usernameField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
