@@ -63,52 +63,53 @@ public class Reservation extends Observable{
     /**
      * Creates a reservation.
      */
-    public static String createReservation(Client client, Chambre chambre, LocalDate dateDebut, LocalDate dateFin) {
+    public static String createReservation(String nom, String prenom, String email, String telephone, Chambre chambre, LocalDate dateDebut, LocalDate dateFin, Hotel hotel) {
         // Check if the start date is before the end date
         if (dateDebut.isAfter(dateFin) || dateDebut.isEqual(dateFin)) {
             return "La date de début doit être avant la date de fin.";
         }
-
+    
+        // Try to find the client in the hotel by email (or name + phone if you prefer)
+        Client existingClient = null;
+        for (Client c : hotel.getListClient()) {
+            if (c.getEmail().equalsIgnoreCase(email)) {
+                existingClient = c;
+                break;
+            }
+        }
+    
+        if (existingClient == null) {
+            // If client doesn't exist, create a new one
+            existingClient = new Client(nom, prenom, email, telephone, hotel);
+            hotel.getListClient().add(existingClient);
+        }
+    
         // Check if the client is banned
-        if (client.isBanned()) {
+        if (existingClient.isBanned()) {
             return "Le client est banni et ne peut pas effectuer de réservation.";
         }
-
+    
         // Check if the room type matches the client's preference
-        if (!chambre.getType().getType().toString().equalsIgnoreCase(client.getPreferance())) {
+        if (!chambre.getType().getType().toString().equalsIgnoreCase(existingClient.getPreferance())) {
             return "La chambre ne correspond pas à la préférence du client.";
         }
-
+    
         // Check if the room is already reserved for the given dates
         for (Reservation reservation : chambre.getListReservation()) {
             if (datesOverlap(reservation.getDateDeb(), reservation.getDateFin(), dateDebut, dateFin)) {
                 return "La chambre est déjà réservée pour les dates sélectionnées.";
             }
         }
-
+    
         // Create the reservation
-        Reservation reservation = new Reservation(dateDebut, dateFin, client, chambre);
-        client.getListReservation().add(reservation);
-        chambre.addReservation(reservation);
-
+        Reservation newReservation = new Reservation(dateDebut, dateFin, existingClient, chambre);
+        existingClient.getListReservation().add(newReservation);
+        chambre.addReservation(newReservation);
+        hotel.getReservationArray().add(newReservation);
+    
         return "Réservation créée avec succès !";
     }
-
-    /**
-     * Deletes a reservation.
-     */
-    public static String deleteReservation(Client client, Reservation reservation) {
-        // Check if the reservation exists in the client's list
-        if (!client.getListReservation().contains(reservation)) {
-            return "La réservation n'existe pas pour ce client.";
-        }
-
-        // Remove the reservation from the client's list and the room's list
-        client.getListReservation().remove(reservation);
-        reservation.getChambre().getListReservation().remove(reservation);
-
-        return "Réservation supprimée avec succès !";
-    }
+    
 
     /**
      * Updates a reservation.

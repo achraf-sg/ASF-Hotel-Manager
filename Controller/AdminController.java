@@ -60,15 +60,6 @@ public class AdminController {
                     int id = Integer.parseInt(view.getIdToDeleteField().getText());
                     boolean found = false;
 
-<<<<<<< HEAD
-
-    public void deleteEmployee(int employeeId) {
-        Employe empToRemove = null;
-        for (Employe emp : hotel.getListEmp()) {
-            if (emp.getId() == employeeId) {
-                empToRemove = emp;
-                break;
-=======
                     for (Employe emp : model.getListEmp()) {
                         if (emp.getId() == id) {
                             found = true;
@@ -86,7 +77,6 @@ public class AdminController {
                 } catch (NumberFormatException ex) {
                     view.showError("ID invalide.");
                 }
->>>>>>> a4a18ea60e75b5311303f1c585cd13a2c8811613
             }
         });
 
