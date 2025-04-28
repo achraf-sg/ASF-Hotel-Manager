@@ -49,7 +49,7 @@ public class LoginController {
             return;
         }
 
-        // Redirection selon le rôle
+        /*// Redirection selon le rôle
         if (emp instanceof Admin) {
             AdminHomePage adminPage = new AdminHomePage();
             new AdminController(model, (Admin) emp, adminPage);
@@ -67,7 +67,7 @@ public class LoginController {
             view.dispose();
         } else {
             view.showError("Type d'utilisateur inconnu.");
-        }
+        }*/
     }
 
 }

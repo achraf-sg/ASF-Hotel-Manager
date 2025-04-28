@@ -4,7 +4,7 @@ import java.awt.*;
 public class StyleConfig {
 
     // Colors for a white and blue theme
-    public static final Color PRIMARY_COLOR = new Color(0, 102, 204); // Blue
+    public static final Color PRIMARY_COLOR = new Color(37, 99, 235); // Blue
     public static final Color SECONDARY_COLOR = new Color(255, 255, 255); // White
     public static final Color BACKGROUND_COLOR = new Color(240, 248, 255); // Light Blue (Alice Blue)
     public static final Color ERROR_COLOR = new Color(220, 53, 69); // Red for errors

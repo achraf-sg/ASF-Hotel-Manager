@@ -45,6 +45,7 @@ public class Chambre extends Observable{
 public boolean isAvailable() {
         return isAvailable;
     }
+
     // Setters
     public void setNumero(int numero) {
         this.numero = numero;
@@ -57,7 +58,7 @@ public boolean isAvailable() {
     }
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
-    }
+    } 
 
     // Add methods
     public void addType(Type t) {
@@ -69,6 +70,9 @@ public boolean isAvailable() {
     }
     public void setAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+    public void changeCleanStatus(boolean isClean) {
+        this.isClean = isClean;
     }
 
 
