@@ -8,7 +8,7 @@ import View.StyleConfig;
 public class LeftPanel extends JPanel {
     JPanel leftContent;
     JButton homeButton, guestsButton, reservationButton, settingsButton, roomsButton, miniBarButton;
-    JButton[] buttons;
+
     public LeftPanel() {
         setBackground(StyleConfig.SECONDARY_COLOR); // Use secondary color for the left panel
         setPreferredSize(StyleConfig.left_tab_size);
@@ -16,7 +16,7 @@ public class LeftPanel extends JPanel {
         setBorder(new EmptyBorder(10, 10, 10, 10)); // Add padding around the left panel
 
         // Left Content Panel
-         leftContent = new JPanel();
+        leftContent = new JPanel();
         leftContent.setLayout(new BoxLayout(leftContent, BoxLayout.Y_AXIS)); // Use BoxLayout for vertical alignment
         leftContent.setBackground(StyleConfig.BACKGROUND_COLOR); // Use background color for left content
         leftContent.setPreferredSize(new Dimension(200, StyleConfig.WINDOW_SIZE.height - 200));
@@ -26,21 +26,14 @@ public class LeftPanel extends JPanel {
         ));
 
         // Buttons
-         homeButton = new JButton("Home");
-         guestsButton = new JButton("Guests");
-         reservationButton = new JButton("Reservation");
-         roomsButton = new JButton("Rooms");
-         miniBarButton = new JButton("Minibar");
-         settingsButton = new JButton("Settings");
+        homeButton = new JButton("Home");
+        guestsButton = new JButton("Guests");
+        reservationButton = new JButton("Reservation");
+        roomsButton = new JButton("Rooms");
+        miniBarButton = new JButton("Minibar");
+        settingsButton = new JButton("Settings");
 
-
-         
-
-
-
-
-       
-        JButton[] buttons = {homeButton, guestsButton, reservationButton,roomsButton, miniBarButton, settingsButton};
+        JButton[] buttons = { homeButton, guestsButton, reservationButton, roomsButton, miniBarButton, settingsButton };
 
         for (JButton button : buttons) {
             button.setFont(StyleConfig.BUTTON_FONT); // Use button font
@@ -53,7 +46,8 @@ public class LeftPanel extends JPanel {
             leftContent.add(button);
         }
 
-         // Add the left content panel to the main panel
+        // Add the left content panel to the main panel
+        add(leftContent); // This line ensures the buttons are displayed
     }
 
     // Custom RoundedBorder class for rounded corners
