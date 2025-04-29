@@ -230,6 +230,20 @@ public class Hotel extends Observable{
         public void addClient(Client client) {
             listClient.add(client);
             setChanged();
+            notifyObservers("Produit Supprimé");
+        }
+<<<<<<< HEAD
+    }
+=======
+
+        // Client methods
+
+        public void addClient(Client client) {
+            listClient.add(client);
+            setChanged();
+            notifyObservers("Client ajouté");
+        }
+>>>>>>> 82211175b946e607c0a66887c1455b942167e788
             notifyObservers("Client ajouté");
         }
 }
