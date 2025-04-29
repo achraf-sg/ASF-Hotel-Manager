@@ -9,7 +9,6 @@ public class Client {
   private String email;
   private boolean isBanned;
   private Vector<Reservation> listReservation = new Vector<Reservation>();
-  private Vector<Sejour> listSejour = new Vector<Sejour>(); // New field for storing stays
   private Hotel hotel;
   private int idClient;
   private static int idCounter = 0;
@@ -49,10 +48,6 @@ public class Client {
 
   public Vector<Reservation> getListReservation() {
     return listReservation;
-  }
-
-  public Vector<Sejour> getListSejour() { // Getter for stays
-    return listSejour;
   }
 
   public Hotel getHotel() {
@@ -99,9 +94,5 @@ public class Client {
   // Add methods
   public void addReservation(Reservation r) {
     listReservation.add(r);
-  }
-
-  public void addSejour(Sejour s) { // Add method for stays
-    listSejour.add(s);
   }
 }

@@ -7,8 +7,7 @@ public class Produit extends Observable{
     private int id;
     private String nom;
     private float prixUnit;
-    private Vector <Type> listpProduit = new Vector <Type>();
-    private Vector <Consommation> listpConsommation = new Vector <Consommation>();
+    private Vector <RoomType> listpProduit = new Vector <RoomType>();
     private Hotel hotel;
 
     public Produit(int id, String nom, float prixUnit, Hotel hotel) {
@@ -28,11 +27,8 @@ public class Produit extends Observable{
     public float getPrixUnit() {
         return prixUnit;
     }
-    public Vector <Type> getListpProduit() {
+    public Vector <RoomType> getListpProduit() {
         return listpProduit;
-    }
-    public Vector <Consommation> getListpConsommation() {
-        return listpConsommation;
     }
     public Hotel getHotel() {
         return hotel;
@@ -53,12 +49,8 @@ public class Produit extends Observable{
     }
 
 
-    public void addType(Type t) {
+    public void addType(RoomType t) {
         listpProduit.add(t);
-    }
-
-    public void addConsommation(Consommation c) {
-        listpConsommation.add(c);
     }
 
 }
