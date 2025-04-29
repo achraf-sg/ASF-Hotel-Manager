@@ -60,7 +60,7 @@ public class DataInitializer {
             hotel.addClient(client);
         }
 
-        List<Chambre> rooms = new ArrayList<>();
+        /*List<Chambre> rooms = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             rooms.add(new Chambre(
                     100 + i, // Room number
@@ -88,7 +88,7 @@ public class DataInitializer {
             clients.get(i).addReservation(reservation);
             rooms.get(i).addReservation(reservation);
             hotel.getReservationArray().add(reservation);
-        }
+        }*/
         return hotel;
     }
 }

@@ -218,4 +218,12 @@ public class Hotel extends Observable{
                 notifyObservers();
             }
         }
+
+        // Client methods
+
+        public void addClient(Client client) {
+            listClient.add(client);
+            setChanged();
+            notifyObservers("Client ajouté");
+        }
 }
