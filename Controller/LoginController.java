@@ -6,7 +6,7 @@ import Models.Hotel;
 import Models.Menage;
 import Models.Reception;
 import View.LoginPage;
-import View.AdminEmployePage;
+import View.AdminEmployeePage;
 import View.ReceptionHomePage;
 import View.MenageHomePage;
 
