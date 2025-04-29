@@ -49,15 +49,14 @@ public class LoginController {
             return;
         }
 
-        /*// Redirection selon le rôle
         if (emp instanceof Admin) {
-            AdminEmployeePage adminPage = new AdminEmployeePage();
+            AdminEmployeePage adminPage = new AdminEmployeePage(model.getListEmp());
             new AdminEmployeeController(model, (Admin) emp, adminPage);
             adminPage.setVisible(true);
             view.dispose();
         } else if (emp instanceof Reception) {
-            ReceptionHomePage receptionPage = new ReceptionHomePage();
-            new ReceptionController(model, (Reception) emp, receptionPage); // tu peux le créer
+            ReceptionHomePage receptionPage = new ReceptionHomePage(model.getListRes());
+            new ReservationPageController(model, (Reception) emp, receptionPage); // tu peux le créer
             receptionPage.setVisible(true);
             view.dispose();
         } else if (emp instanceof Menage) {

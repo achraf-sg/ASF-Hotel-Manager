@@ -45,7 +45,7 @@ public class RoomPageController {
             view.showError("Cette chambre existe déjà.");
             return;
           }
-
+          
           model.addChambre(numero, etage, type);
           view.showMessage("Chambre ajoutée avec succès !");
           view.clearChambreForm(); // méthode à créer si tu veux
@@ -58,9 +58,11 @@ public class RoomPageController {
     
     //supprimer chambre
     view.getTable().addMouseListener(new MouseAdapter() {
+      @Override
       public void mouseClicked(MouseEvent e) {
         int row = view.getTable().rowAtPoint(e.getPoint());
         int column = view.getTable().columnAtPoint(e.getPoint());
+        int columnCount = view.getTable().getColumnCount();
         if (column == 6) { // Supprimer
           int numero = (int) view.getTable().getValueAt(row, 0);
           int etage = (int) view.getTable().getValueAt(row, 1);
