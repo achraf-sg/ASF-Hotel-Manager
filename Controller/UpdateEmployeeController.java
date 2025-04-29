@@ -37,7 +37,7 @@ public class UpdateEmployeeController {
         view.dispose();
       }
     });
-  }
+  }>
 
   private void populateFields() {
     // Remplir les champs avec les données actuelles de l'employé

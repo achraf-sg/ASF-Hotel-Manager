@@ -1,14 +1,12 @@
 package Controller;
 
 import Models.Admin;
-import Models.Chambre;
 import Models.Hotel;
 import Models.Menage;
 import Models.Reception;
 import Models.Employe;
 import View.AdminEmployeePage;
 import View.UpdateEmployeePage;
-import Models.Type;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,6 +49,7 @@ public class AdminEmployeeController {
                 }
 
                 model.addEmployee(newEmp);
+                view.remplirTableEmployes(model.getListEmp());
                 view.showMessage("Employee added succesfully !");
                 view.clearForm();
             }
