@@ -50,8 +50,7 @@ public class DataInitializer {
                     "LastName" + i,
                     "55512345" + i,
                     "client" + i + "@example.com",
-                    hotel,
-                    "Deluxe"
+                    hotel
             ));
         }
 

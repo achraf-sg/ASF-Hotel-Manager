@@ -15,7 +15,7 @@ public class Client {
   private static int idCounter = 0;
   private String preferance;
 
-  public Client(String nom, String prenom, String telephone, String email, Hotel hotel, String preferance) {
+  public Client(String nom, String prenom, String telephone, String email, Hotel hotel) {
     this.idClient = idCounter++;
     this.nom = nom;
     this.prenom = prenom;
@@ -23,7 +23,7 @@ public class Client {
     this.email = email;
     this.hotel = hotel;
     this.isBanned = false;
-    this.preferance = preferance;
+    
   }
 
   // Getters
