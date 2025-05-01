@@ -6,7 +6,7 @@ import Models.Hotel;
 import Models.Menage;
 import Models.Reception;
 import View.LoginPage;
-import View.AdminEmployeePage;
+import View.AdminHomePage;
 import View.ReceptionHomePage;
 import View.MenageHomePage;
 
@@ -50,23 +50,23 @@ public class LoginController {
         }
 
         if (emp instanceof Admin) {
-            AdminEmployeePage adminPage = new AdminEmployeePage(model.getListEmp());
-            new AdminEmployeeController(model, (Admin) emp, adminPage);
+            // Redirect to AdminHomePage
+            AdminHomePage adminPage = new AdminHomePage(model);
             adminPage.setVisible(true);
             view.dispose();
+            System.out.println("Admin logged in: " + emp.getNom());
         } else if (emp instanceof Reception) {
-            ReceptionHomePage receptionPage = new ReceptionHomePage(model.getListRes());
-            new ReservationPageController(model, (Reception) emp, receptionPage); // tu peux le créer
+            // Redirect to ReceptionHomePage
+            ReceptionHomePage receptionPage = new ReceptionHomePage(model);
             receptionPage.setVisible(true);
             view.dispose();
         } else if (emp instanceof Menage) {
-            MenageHomePage menagePage = new MenageHomePage();
-            new MenageController(model, (Menage) emp, menagePage); // tu peux le créer aussi
+            // Redirect to MenageHomePage
+            MenageHomePage menagePage = new MenageHomePage(model);
             menagePage.setVisible(true);
             view.dispose();
         } else {
             view.showError("Type d'utilisateur inconnu.");
-        }*/
+        }
     }
-
 }

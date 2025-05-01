@@ -5,22 +5,25 @@ import java.time.format.DateTimeParseException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Models.*;
-import View.ReceptionHomePage;
+import View.ReservationPage;
 import View.UpdateEmployeePage;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
+import javax.swing.*;
+import java.awt.event.MouseListener;  
 
-class ReservationPageController implements ActionListener {
+public class ReservationPageController {
 
   private Hotel model;
-  private Reception reception;
-  private ReceptionHomePage view;
+  private ReservationPage view;
   private int SingleRoomsAvailable = 0, DoubleRoomsAvailable = 0, SuitsAvailable = 0, KingRoomsAvailable = 0;
   private LocalDate startDate = null, endDate = null;
 
-  public ReservationPageController(Hotel hotel, Reception reception, ReceptionHomePage page) {
+  public ReservationPageController(Hotel hotel, ReservationPage page) {
     this.model = hotel;
-    this.reception = reception;
     this.view = page;
 
     initTableListeners();
@@ -29,16 +32,12 @@ class ReservationPageController implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
         try {
-          startDate = LocalDate.parse(view.getStartDate().getText());
-          endDate = LocalDate.parse(view.getEndDate().getText());
+          LocalDate startDate = LocalDate.parse(view.getStartDate().getText());
+          LocalDate endDate = LocalDate.parse(view.getEndDate().getText());
+          view.updateRoomTypeDropdown(model.getListTypes(), model, startDate, endDate);
         } catch (DateTimeParseException ex) {
           view.showError("Invalid Date Format. Use YYYY-MM-DD.");
-          return;
         }
-        SingleRoomsAvailable = model.countChambresDisponibles("Single", startDate, endDate);
-        DoubleRoomsAvailable = model.countChambresDisponibles("Double", startDate, endDate);
-        SuitsAvailable = model.countChambresDisponibles("Suite", startDate, endDate);
-        KingRoomsAvailable = model.countChambresDisponibles("King", startDate, endDate);
       }
     });
     // bouton "ajouter"
@@ -60,7 +59,7 @@ class ReservationPageController implements ActionListener {
         }
         Reservation res = new Reservation(startDate, endDate, email, roomType);
         model.addReservation(res);
-        view.remplirTableReservation(model.getListRes());
+        view.populateReservationTable(model.getListRes());
         view.showMessage("Reservation added succesfully !");
         view.clearForm();
       }
@@ -68,28 +67,28 @@ class ReservationPageController implements ActionListener {
   }
 
   private void initTableListeners() {
-    int columnCount = view.getColumnCount();
+    int columnCount = view.getTable().getColumnCount();
     view.getTable().addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         int row = view.getTable().rowAtPoint(e.getPoint());
         int column = view.getTable().columnAtPoint(e.getPoint());
 
-        if (column == columnCount - 2) { // Edit
-          int id = (int) view.getTable().getValueAt(row, 0);
-          Reservation res = model.findReservationById(id);
-          if (res != null) {
-            UpdateReservationPage modifierPage = new UpdateReservationPage(res, model);
-            new UpdateReservationController(model, res, modifierPage);
-            modifierPage.setVisible(true);
-            view.dispose(); // Optionally close the current page
-          }
-        }
+        // if (column == columnCount - 2) { // Edit
+        //   int id = (int) view.getTable().getValueAt(row, 0);
+        //   Reservation res = model.findReservationById(id);
+        //   if (res != null) {
+        //     UpdateReservationPage modifierPage = new UpdateReservationPage(res, model);
+        //     new UpdateReservationController(model, res, modifierPage);
+        //     modifierPage.setVisible(true);
+        //     view.dispose(); // Optionally close the current page
+        //   }
+        // }
 
         if (column == columnCount - 1) { // Delete
           int id = (int) view.getTable().getValueAt(row, 0);
           model.deleteReservation(id);
           view.showMessage("Reservation deleted successfully!");
-          view.remplirTableReservation(model.getListRes());
+          view.populateReservationTable(model.getListRes());
         }
       }
     });
@@ -109,6 +108,6 @@ class ReservationPageController implements ActionListener {
       view.showError("Wrong Room Type");
       return -1;
     }
-    ;
+    
   }
 }

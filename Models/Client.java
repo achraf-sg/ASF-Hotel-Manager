@@ -12,7 +12,6 @@ public class Client {
   private Hotel hotel;
   private int idClient;
   private static int idCounter = 0;
-  private String preferance;
 
   public Client(String nom, String prenom, String telephone, String email, Hotel hotel) {
     this.idClient = idCounter++;
@@ -58,9 +57,6 @@ public class Client {
     return idClient;
   }
 
-  public String getPreferance() {
-    return preferance;
-  }
 
   // Setters
   public void setNom(String nom) {
@@ -87,9 +83,7 @@ public class Client {
     this.hotel = hotel;
   }
 
-  public void setPreferance(String preferance) {
-    this.preferance = preferance;
-  }
+
 
   // Add methods
   public void addReservation(Reservation r) {

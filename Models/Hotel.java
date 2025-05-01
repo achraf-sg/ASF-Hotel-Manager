@@ -109,6 +109,14 @@ public class Hotel extends Observable {
         listCham.add(chambre);
 
     }
+    public Chambre findChambreByNumber(int num) {
+        for (Chambre c : listCham) {
+            if(c.getNumero() == num) {
+                return c;
+            }
+        }
+        return null;
+    }
 
     // Employee methods
     public void addEmployee(Employe employe) {
@@ -132,11 +140,13 @@ public class Hotel extends Observable {
         }
     }
 
-    public void updateEmployee(int id, String nom, String email, String telephone, String adresse, String password) {
+    public void updateEmployee(int id, String nom, String prenom, String email, String telephone, String adresse, String password) {
         for (Employe emp : getListEmp()) {
             if (emp.getId() == id) {
                 if (nom != null)
                     emp.setNom(nom);
+                if (prenom != null)
+                    emp.setPrenom(prenom);
                 if (email != null)
                     emp.setEmail(email);
                 if (telephone != null)
@@ -197,8 +207,8 @@ public class Hotel extends Observable {
         }
     }
 
-    public void addType(String nom, float prix) {
-        RoomType type = new RoomType(nom, prix);
+    public void addType(String nom, float prix, int maxPeople) {
+        RoomType type = new RoomType(nom, prix, maxPeople);
         listTypes.add(type);
         setChanged();
         notifyObservers();
@@ -266,5 +276,23 @@ public class Hotel extends Observable {
             setChanged();
             notifyObservers("Reservation Supprimé");
         }
+    }
+
+    public Produit findProduitByName(String product) {
+        for (Produit p : listProd) {
+            if (p.getNom().equalsIgnoreCase(product)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Client findClientById(int id) {
+        for (Client c : listClient) {
+            if (c.getIdClient() == id) {
+                return c;
+            }
+        }
+        return null;
     }
 }
