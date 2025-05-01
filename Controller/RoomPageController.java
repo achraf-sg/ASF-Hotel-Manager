@@ -3,7 +3,7 @@ package Controller;
 import Models.Chambre;
 import Models.Employe;
 import Models.Hotel;
-import Models.Type;
+import Models.RoomType;
 import Models.Admin;
 import View.RoomPage;
 import View.UpdateEmployeePage;
@@ -30,7 +30,7 @@ public class RoomPageController {
         try {
           int numero = Integer.parseInt(view.getNumChamField().getText());
           int etage = Integer.parseInt(view.getEtageField().getText());
-          Type type = (Type) view.getTypeChamBox().getSelectedItem();
+          RoomType type = (RoomType) view.getTypeChamBox().getSelectedItem();
 
           // Vérifie si la chambre existe déjà
           boolean exists = false;
@@ -45,10 +45,11 @@ public class RoomPageController {
             view.showError("Cette chambre existe déjà.");
             return;
           }
-
+          
           model.addChambre(numero, etage, type);
+          view.populateRoomTable(model.getListCham()); // Add this line to refresh the table
           view.showMessage("Chambre ajoutée avec succès !");
-          view.clearChambreForm(); // méthode à créer si tu veux
+          view.clearForm();
 
         } catch (NumberFormatException ex) {
           view.showError("Numéro ou étage invalide.");
@@ -58,16 +59,17 @@ public class RoomPageController {
     
     //supprimer chambre
     view.getTable().addMouseListener(new MouseAdapter() {
+      @Override
       public void mouseClicked(MouseEvent e) {
         int row = view.getTable().rowAtPoint(e.getPoint());
         int column = view.getTable().columnAtPoint(e.getPoint());
+        int columnCount = view.getTable().getColumnCount();
         if (column == 6) { // Supprimer
           int numero = (int) view.getTable().getValueAt(row, 0);
           int etage = (int) view.getTable().getValueAt(row, 1);
           model.deleteChambre(numero, etage);
-          ;
           view.showMessage("Chambre supprimé avec succès !");
-          view.remplirTableChambres(model.getListCham());
+          view.populateRoomTable(model.getListCham());
         }
       }
     });

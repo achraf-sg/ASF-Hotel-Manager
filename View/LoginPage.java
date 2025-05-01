@@ -2,9 +2,6 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import Controller.LoginController;
 import Models.Hotel;
 
 public class LoginPage extends JFrame {

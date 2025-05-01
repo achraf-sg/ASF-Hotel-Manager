@@ -13,27 +13,19 @@ import Models.Menage;
 import Models.Reception;
 import Models.DataInitializer;
 
-public class AdminEmployeePage extends JFrame {
+public class EmployeePage extends JFrame {
     private JTable employeeTable;
     private JTextField nameField, surnameField, addressField, phoneField, emailField, passwordField;
     private JComboBox<String> functionComboBox;
     private JButton addButton;
 
-    public AdminEmployeePage(Vector<Employe> employees) {
+    public EmployeePage(Vector<Employe> employees) {
         setTitle("Admin Employee Management");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(StyleConfig.WINDOW_SIZE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.WHITE);
-
-        // Left Navigation Panel
-        JPanel leftPanelContainer = new JPanel(new BorderLayout());
-        leftPanelContainer.setBackground(Color.WHITE);
-        leftPanelContainer.setBorder(new EmptyBorder(0, 10, 0, 10)); // Add padding around the left panel
-        LeftPanel leftPanel = new LeftPanel(); // Use the new LeftPanel class
-        leftPanelContainer.add(leftPanel, BorderLayout.CENTER);
-        add(leftPanelContainer, BorderLayout.WEST);
 
         // Header Panel
         HeaderPanel headerPanel = new HeaderPanel("Employee Management");
@@ -58,7 +50,7 @@ public class AdminEmployeePage extends JFrame {
         tableTitle.setBorder(new EmptyBorder(0, 0, 15, 0)); // Add padding below the title
         centerPanel.add(tableTitle, BorderLayout.NORTH);
 
-        String[] columnNames = {"ID", "Full Name", "Adress", "Phone Num", "Email", "Function", "Action"};
+        String[] columnNames = {"ID", "Full Name", "Adress", "Phone Num", "Email", "Function", "edit", "delete"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -195,7 +187,9 @@ public class AdminEmployeePage extends JFrame {
                 emp.getTelephone(),
                 emp.getEmail(),
                 role,
-                "✏️ 🗑️" // Placeholder for action buttons
+                "add",
+                "delete"
+                 // Placeholder for action buttons
             });
         }
     }
@@ -277,6 +271,6 @@ public class AdminEmployeePage extends JFrame {
         Vector<Employe> employees = hotel.getListEmp();
 
         // Launch the AdminEmployeePage
-        SwingUtilities.invokeLater(() -> new AdminEmployeePage(employees));
+        SwingUtilities.invokeLater(() -> new EmployeePage(employees));
     }
 }

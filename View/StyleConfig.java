@@ -1,6 +1,10 @@
 package View;
 import java.awt.*;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+
 public class StyleConfig {
 
     // Colors for a white and blue theme
@@ -22,4 +26,31 @@ public class StyleConfig {
     public static final Dimension BUTTON_SIZE = new Dimension(150, 40);
     public static final Dimension right_tab_size = new Dimension(300, 700);
     public static final Dimension left_tab_size = new Dimension(200, 700);
+
+
+
+
+    //// Jtable style : a modifier 
+    /// 
+    /// 
+    public void JtableDesigne( JTable table) {
+        table.setBackground(StyleConfig.BACKGROUND_COLOR); // Set background color
+        table.setForeground(Color.DARK_GRAY); // Set text color
+        table.setFont(StyleConfig.NORMAL_FONT); // Set font
+        table.setRowHeight(30); // Set row height
+    
+        // Set header properties
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(StyleConfig.PRIMARY_COLOR); // Header background color
+        header.setForeground(Color.WHITE); // Header text color
+        header.setFont(StyleConfig.HEADER_FONT); // Header font
+        header.setReorderingAllowed(false); // Disable column reordering
+    
+        // Set cell renderers for better appearance
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        table.setDefaultRenderer(Object.class, centerRenderer);
+    }
 }
+
+

@@ -1,0 +1,62 @@
+package Controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import Models.Hotel;
+import Models.Produit;
+import View.UpdateProduitPage;
+
+public class UpdateProduitController {
+
+    private Hotel hotel;
+    private Produit produit;
+    private UpdateProduitPage view;
+
+    public UpdateProduitController(Hotel hotel, Produit produit, UpdateProduitPage view) {
+        this.hotel = hotel;
+        this.produit = produit;
+        this.view = view;
+
+        // Pre-fill the form with the current product data
+        view.getNomField().setText(produit.getNom());
+        view.getPrixField().setText(String.valueOf(produit.getPrixUnit()));
+        view.getQuantiteField().setText(String.valueOf(produit.getQuantite()));
+
+        // Add listener for the update button
+        view.getUpdateButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleUpdate();
+            }
+        });
+    }
+
+    /**
+     * Handles the update logic for the product.
+     */
+    private void handleUpdate() {
+        try {
+            String nom = view.getNomField().getText();
+            float prixUnit = Float.parseFloat(view.getPrixField().getText());
+            int qte = Integer.parseInt(view.getQuantiteField().getText());
+
+            // Ensure quantity is positive
+            if (qte < 0) {
+                view.showError("La quantité ne peut pas être négative !");
+                return;
+            }
+
+            // Update the product data
+            produit.setNom(nom);
+            produit.setPrixUnit(prixUnit);
+            produit.setQuantite(qte);
+
+            view.showMessage("Produit mis à jour avec succès !");
+            view.dispose(); // Close the update page
+
+        } catch (NumberFormatException ex) {
+            view.showError("Veuillez entrer des valeurs valides pour le prix et la quantité !");
+        }
+    }
+}

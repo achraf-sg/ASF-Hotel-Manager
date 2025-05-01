@@ -3,22 +3,36 @@ package Controller;
 import Models.Employe;
 import Models.Hotel;
 import View.UpdateEmployeePage;
+import View.EmployeePage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class UpdateEmployeeController {
   private Hotel model;
   private Employe employe;
   private UpdateEmployeePage view;
+  private EmployeePage mainView; // Add reference to main view
 
-  public UpdateEmployeeController(Hotel model, Employe employe, UpdateEmployeePage view) {
+  public UpdateEmployeeController(Hotel model, Employe employe, UpdateEmployeePage view, EmployeePage mainView) {
     this.model = model;
     this.employe = employe;
     this.view = view;
+    this.mainView = mainView;
 
     initListeners();
-    populateFields();
+    
+    // Add window listener to refresh table when window closes
+    view.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosed(WindowEvent e) {
+        if (mainView != null) {
+          mainView.remplirTableEmployes(model.getListEmp());
+        }
+      }
+    });
   }
 
   private void initListeners() {
@@ -39,30 +53,21 @@ public class UpdateEmployeeController {
     });
   }
 
-  private void populateFields() {
-    // Remplir les champs avec les données actuelles de l'employé
-    view.getNomField().setText(employe.getNom());
-    view.getPrenomField().setText(employe.getPrenom());
-    view.getAdresseField().setText(employe.getAdresse());
-    view.getTelephoneField().setText(employe.getTelephone());
-    view.getEmailField().setText(employe.getEmail());
-    view.getPasswordField().setText(employe.getPassword());
-  }
-
   private void handleUpdate() {
     // Récupérer les nouvelles valeurs des champs
-    String nom = view.getNomField().getText();
-    String prenom = view.getPrenomField().getText();
-    String adresse = view.getAdresseField().getText();
-    String telephone = view.getTelephoneField().getText();
+    String nom = view.getNameField().getText();
+    String prenom = view.getSurnameField().getText();
+    String adresse = view.getAddressField().getText();
+    String telephone = view.getPhoneField().getText();
     String email = view.getEmailField().getText();
     String password = new String(view.getPasswordField().getPassword());
 
     // Mettre à jour les informations de l'employé
-    model.updateEmployee(employe.getId(), nom, email, telephone, adresse, password);
+    model.updateEmployee(employe.getId(), nom, prenom, email, telephone, adresse, password);
 
     // Afficher un message de succès et fermer la page
     view.showMessage("Employé mis à jour avec succès !");
+    
     view.dispose();
   }
 }

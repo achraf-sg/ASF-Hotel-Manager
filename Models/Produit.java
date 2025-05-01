@@ -5,16 +5,17 @@ import java.util.*;
 public class Produit extends Observable{
 
     private int id;
+    private static int idCounter = 0;
     private String nom;
     private float prixUnit;
-    private Vector <Type> listpProduit = new Vector <Type>();
-    private Vector <Consommation> listpConsommation = new Vector <Consommation>();
+    private int quantite;
     private Hotel hotel;
 
-    public Produit(int id, String nom, float prixUnit, Hotel hotel) {
-        this.id = id;
+    public Produit(String nom, float prixUnit, int quantite, Hotel hotel) {
+        this.id = ++idCounter; // Auto-increment ID
         this.nom = nom;
         this.prixUnit = prixUnit;
+        this.quantite = quantite;
         this.hotel = hotel;
     }
 
@@ -28,11 +29,8 @@ public class Produit extends Observable{
     public float getPrixUnit() {
         return prixUnit;
     }
-    public Vector <Type> getListpProduit() {
-        return listpProduit;
-    }
-    public Vector <Consommation> getListpConsommation() {
-        return listpConsommation;
+    public int getQuantite() {
+        return quantite;
     }
     public Hotel getHotel() {
         return hotel;
@@ -51,14 +49,8 @@ public class Produit extends Observable{
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
-
-
-    public void addType(Type t) {
-        listpProduit.add(t);
-    }
-
-    public void addConsommation(Consommation c) {
-        listpConsommation.add(c);
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 
 }

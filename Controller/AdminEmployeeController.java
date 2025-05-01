@@ -1,14 +1,12 @@
 package Controller;
 
 import Models.Admin;
-import Models.Chambre;
 import Models.Hotel;
 import Models.Menage;
 import Models.Reception;
 import Models.Employe;
-import View.AdminEmployeePage;
+import View.EmployeePage;
 import View.UpdateEmployeePage;
-import Models.Type;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,11 +14,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class AdminEmployeeController {
-    AdminEmployeePage view;
+    EmployeePage view;
     Hotel model;
     Admin admin;
 
-    public AdminEmployeeController(Hotel model, Admin admin, AdminEmployeePage view) {
+    public AdminEmployeeController(Hotel model, Admin admin, EmployeePage view) {
         this.model = model;
         this.admin = admin;
         this.view = view;
@@ -31,6 +29,7 @@ public class AdminEmployeeController {
         this.view.getAddButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("Add Employee button clicked.");
                 String type = view.getFunctionComboBox().getSelectedItem().toString();
                 String nom = view.getNameField().getText();
                 String prenom = view.getSurnameField().getText();
@@ -38,6 +37,8 @@ public class AdminEmployeeController {
                 String tel = view.getPhoneField().getText();
                 String email = view.getEmailField().getText();
                 String password = view.getPasswordField().getText();
+
+                System.out.println("Name: " + nom + ", Surname: " + prenom);
 
                 Employe newEmp = null;
 
@@ -51,6 +52,9 @@ public class AdminEmployeeController {
                 }
 
                 model.addEmployee(newEmp);
+                System.out.println("Employee added: " + newEmp.getNom());
+                view.remplirTableEmployes(model.getListEmp());
+                System.out.println("Table refreshed with " + model.getListEmp().size() + " employees.");
                 view.showMessage("Employee added succesfully !");
                 view.clearForm();
             }
@@ -65,22 +69,23 @@ public class AdminEmployeeController {
                 int row = view.getTable().rowAtPoint(e.getPoint());
                 int column = view.getTable().columnAtPoint(e.getPoint());
     
-                if (column == 6) { // Edit
+                if (column == view.getTable().getColumnCount()-2) { // Edit
                     int id = (int) view.getTable().getValueAt(row, 0);
                     Employe emp = model.findEmployeeById(id);
                     if (emp != null) {
                         UpdateEmployeePage modifierPage = new UpdateEmployeePage(emp, model);
-                        new UpdateEmployeeController(model, emp, modifierPage);
+                        new UpdateEmployeeController(model, emp, modifierPage, view); // Pass view reference
                         modifierPage.setVisible(true);
-                        view.dispose(); // Optionally close the current page
+                        // Remove the premature table refresh
                     }
                 }
     
-                if (column == 7) { // Delete
+                if (column ==  view.getTable().getColumnCount()-1) { // Delete
                     int id = (int) view.getTable().getValueAt(row, 0);
                     model.deleteEmployee(id);
                     view.showMessage("Employee deleted successfully!");
                     view.remplirTableEmployes(model.getListEmp());
+                    System.out.println("Table refreshed with " + model.getListEmp().size() + " employees.");
                 }
             }
         });
