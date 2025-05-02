@@ -45,18 +45,18 @@ public class DataInitializer {
                 "Employee",
                 "Reception Address",
                 "0987654321",
-                "reception@hotel.com",
+                "recep",
                 hotel,
-                "reception123"
+                "recep"
         ));
         employees.add(new Menage(
                 "Cleaner",
                 "Worker",
                 "Cleaner Address",
                 "1122334455",
-                "cleaner@hotel.com",
+                "clean",
                 hotel,
-                "clean123"
+                "clean"
         ));
 
         for (Employe employee : employees) {
@@ -87,6 +87,11 @@ public class DataInitializer {
                     hotel
             );
             hotel.addChambre(room);
+            
+            // Mark some rooms as not clean for testing the cleaning functionality
+            if (i % 3 == 0) { // Every 3rd room will be dirty
+                room.setClean(false);
+            }
         }
     }
 

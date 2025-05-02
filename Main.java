@@ -7,6 +7,9 @@ public class Main {
     public static void main(String[] args) {
         // Initialize the hotel with sample data
         Hotel hotel = DataInitializer.initializeHotel();
+        
+        // Clean up any expired reservations
+        hotel.cleanupExpiredReservations();
 
         // Launch the LoginPage
         SwingUtilities.invokeLater(() -> {

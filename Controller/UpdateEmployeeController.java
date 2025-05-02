@@ -3,7 +3,7 @@ package Controller;
 import Models.Employe;
 import Models.Hotel;
 import View.UpdateEmployeePage;
-import View.EmployeePage;
+import View.EmployeePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +14,9 @@ public class UpdateEmployeeController {
   private Hotel model;
   private Employe employe;
   private UpdateEmployeePage view;
-  private EmployeePage mainView; // Add reference to main view
+  private EmployeePanel mainView; // Add reference to main view
 
-  public UpdateEmployeeController(Hotel model, Employe employe, UpdateEmployeePage view, EmployeePage mainView) {
+  public UpdateEmployeeController(Hotel model, Employe employe, UpdateEmployeePage view, EmployeePanel mainView) {
     this.model = model;
     this.employe = employe;
     this.view = view;
