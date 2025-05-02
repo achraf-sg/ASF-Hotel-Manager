@@ -295,4 +295,26 @@ public class Hotel extends Observable {
         }
         return null;
     }
+
+    public void cleanupExpiredReservations() {
+        LocalDate oneDayAfterStartDate = LocalDate.now().minusDays(1);
+        List<Reservation> toRemove = new ArrayList<>();
+        
+        for (Reservation reservation : listRes) {
+            // If reservation started yesterday or earlier AND not checked in
+            if (reservation.getDateDeb().compareTo(oneDayAfterStartDate) <= 0 && 
+                !reservation.getIsCheckedIn()) {
+                toRemove.add(reservation);
+            }
+        }
+        
+        // Remove identified reservations
+        if (!toRemove.isEmpty()) {
+            for (Reservation reservation : toRemove) {
+                listRes.remove(reservation);
+            }
+            setChanged();
+            notifyObservers("Removed " + toRemove.size() + " expired unclaimed reservations");
+        }
+    }
 }

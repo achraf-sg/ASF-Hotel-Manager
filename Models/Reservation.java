@@ -11,6 +11,7 @@ public class Reservation extends Observable {
     private String clientMail;
     private RoomType type;
     private static int idCounter = 0;
+    private boolean isCheckedIn = false, isCheckedOut = false;
 
     public Reservation(LocalDate dateDeb, LocalDate dateFin, String mail, RoomType type) {
         this.id = idCounter++;
@@ -41,6 +42,13 @@ public class Reservation extends Observable {
         return type;
     }
 
+    public boolean getIsCheckedIn() {
+        return isCheckedIn;
+    }
+
+    public boolean getIsCheckedOut() {
+        return isCheckedOut;
+    }
 
     // Setters
     public void setDateDeb(LocalDate dateDeb) {
@@ -53,6 +61,14 @@ public class Reservation extends Observable {
 
     public void setClientMail(String mail) {
         this.clientMail = mail;
+    }
+
+    public void setCheckedIn(boolean checkedIn) {
+        this.isCheckedIn = checkedIn;
+    }
+
+    public void setCheckedOut(boolean checkedOut) {
+        this.isCheckedOut = checkedOut;
     }
 
     public boolean datesOverlap(LocalDate existingStart, LocalDate existingEnd, LocalDate newStart,

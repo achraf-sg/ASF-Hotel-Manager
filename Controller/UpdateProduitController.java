@@ -2,9 +2,12 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import Models.Hotel;
 import Models.Produit;
+import View.ProduitPanel;
 import View.UpdateProduitPage;
 
 public class UpdateProduitController {
@@ -12,11 +15,13 @@ public class UpdateProduitController {
     private Hotel hotel;
     private Produit produit;
     private UpdateProduitPage view;
+    private ProduitPanel mainView; // Change from ProduitPage to ProduitPanel
 
-    public UpdateProduitController(Hotel hotel, Produit produit, UpdateProduitPage view) {
+    public UpdateProduitController(Hotel hotel, Produit produit, UpdateProduitPage view, ProduitPanel mainView) {
         this.hotel = hotel;
         this.produit = produit;
         this.view = view;
+        this.mainView = mainView;
 
         // Pre-fill the form with the current product data
         view.getNomField().setText(produit.getNom());
@@ -28,6 +33,24 @@ public class UpdateProduitController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 handleUpdate();
+            }
+        });
+        
+        // Add window listener to refresh table when update window closes
+        view.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (mainView != null) {
+                    mainView.populateProduitTable(hotel.getListProd());
+                }
+            }
+        });
+        
+        // Add listener for the cancel button
+        view.getCancelButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.dispose();
             }
         });
     }
@@ -53,6 +76,12 @@ public class UpdateProduitController {
             produit.setQuantite(qte);
 
             view.showMessage("Produit mis à jour avec succès !");
+            
+            // Refresh the table in the main view
+            if (mainView != null) {
+                mainView.populateProduitTable(hotel.getListProd());
+            }
+            
             view.dispose(); // Close the update page
 
         } catch (NumberFormatException ex) {

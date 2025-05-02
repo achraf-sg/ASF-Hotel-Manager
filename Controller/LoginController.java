@@ -1,15 +1,7 @@
 package Controller;
 
-import Models.Admin;
-import Models.Employe;
-import Models.Hotel;
-import Models.Menage;
-import Models.Reception;
-import View.LoginPage;
-import View.AdminHomePage;
-import View.ReceptionHomePage;
-import View.MenageHomePage;
-
+import Models.*;
+import View.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,33 +32,18 @@ public class LoginController {
         Employe emp = model.findEmployeeByEmail(email);
 
         if (emp == null) {
-            view.showError("Aucun employé trouvé avec cet email.");
+            view.showError("No employee found with this email.");
             return;
         }
 
         if (!emp.getPassword().equals(password)) {
-            view.showError("Mot de passe incorrect.");
+            view.showError("Incorrect password.");
             return;
         }
 
-        if (emp instanceof Admin) {
-            // Redirect to AdminHomePage
-            AdminHomePage adminPage = new AdminHomePage(model);
-            adminPage.setVisible(true);
-            view.dispose();
-            System.out.println("Admin logged in: " + emp.getNom());
-        } else if (emp instanceof Reception) {
-            // Redirect to ReceptionHomePage
-            ReceptionHomePage receptionPage = new ReceptionHomePage(model);
-            receptionPage.setVisible(true);
-            view.dispose();
-        } else if (emp instanceof Menage) {
-            // Redirect to MenageHomePage
-            MenageHomePage menagePage = new MenageHomePage(model);
-            menagePage.setVisible(true);
-            view.dispose();
-        } else {
-            view.showError("Type d'utilisateur inconnu.");
-        }
+        // Create the MainFrame with the appropriate user
+        MainFrame mainFrame = new MainFrame(model, emp);
+        mainFrame.setVisible(true);
+        view.dispose();
     }
 }

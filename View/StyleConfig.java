@@ -5,20 +5,25 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
+/**
+ * Centralized style configuration for consistent UI appearance
+ */
 public class StyleConfig {
 
-    // Colors for a white and blue theme
-    public static final Color PRIMARY_COLOR = new Color(37, 99, 235); // Blue
+    // Colors
+    public static final Color PRIMARY_COLOR = new Color(37, 99, 235);
+    public static final Color PRIMARY_DARK_COLOR = new Color(20, 60, 160);
+    public static final Color BACKGROUND_COLOR = Color.WHITE;
+    public static final Color TABLE_HEADER_COLOR = new Color(240, 240, 240);
     public static final Color SECONDARY_COLOR = new Color(255, 255, 255); // White
-    public static final Color BACKGROUND_COLOR = new Color(240, 248, 255); // Light Blue (Alice Blue)
     public static final Color ERROR_COLOR = new Color(220, 53, 69); // Red for errors
     public static final Color SUCCESS_COLOR = new Color(40, 167, 69); // Green for success
 
-    // Professional fonts
-    public static final Font HEADER_FONT = new Font("Arial", Font.BOLD, 24); // Header font
-    public static final Font TITLE_FONT = new Font("Arial", Font.BOLD, 18); // Title font
-    public static final Font NORMAL_FONT = new Font("Arial", Font.PLAIN, 14); // Normal text font
-    public static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 14); // Button font
+    // Fonts
+    public static final Font TITLE_FONT = new Font("Arial", Font.BOLD, 18);
+    public static final Font NORMAL_FONT = new Font("Arial", Font.PLAIN, 14);
+    public static final Font BUTTON_FONT = new Font("Arial", Font.BOLD, 14);
+    public static final Font HEADER_FONT = new Font("Arial", Font.BOLD, 24);
 
     // Dimensions
     public static final Dimension WINDOW_SIZE = new Dimension(1200, 700);
@@ -27,12 +32,7 @@ public class StyleConfig {
     public static final Dimension right_tab_size = new Dimension(300, 700);
     public static final Dimension left_tab_size = new Dimension(200, 700);
 
-
-
-
     //// Jtable style : a modifier 
-    /// 
-    /// 
     public void JtableDesigne( JTable table) {
         table.setBackground(StyleConfig.BACKGROUND_COLOR); // Set background color
         table.setForeground(Color.DARK_GRAY); // Set text color
