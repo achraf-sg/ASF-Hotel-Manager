@@ -8,7 +8,7 @@ public class Client {
   private String telephone;
   private String email;
   private boolean isBanned;
-  private Vector<Reservation> listReservation = new Vector<Reservation>();
+  private Vector<Sejour> listSejours = new Vector<Sejour>();
   private Hotel hotel;
   private int idClient;
   private static int idCounter = 0;
@@ -45,8 +45,8 @@ public class Client {
     return isBanned;
   }
 
-  public Vector<Reservation> getListReservation() {
-    return listReservation;
+  public Vector<Sejour> getListSejours() {
+    return listSejours;
   }
 
   public Hotel getHotel() {
@@ -83,10 +83,8 @@ public class Client {
     this.hotel = hotel;
   }
 
-
-
   // Add methods
-  public void addReservation(Reservation r) {
-    listReservation.add(r);
+  public void addSejour(Sejour s) {
+    listSejours.add(s);
   }
 }

@@ -3,10 +3,13 @@ package Models;
 import java.util.Observable;
 
 public class Consommation extends Observable{
+    private int id;
+    private static int idCounter = 0;
     private Produit produit;
     private int quantite;
 
     public Consommation(Produit produit, int quantite) {
+        this.id = idCounter++;
         if (produit.getQuantite() < quantite) {
             throw new IllegalArgumentException("Quantité demandée supérieure au stock !");
         }
@@ -22,4 +25,7 @@ public class Consommation extends Observable{
     // Getters
     public Produit getProduit() { return produit; }
     public int getQuantite() { return quantite; }
+    public int getId() {
+        return id;
+    }
 }
