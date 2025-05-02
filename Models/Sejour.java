@@ -6,26 +6,21 @@ import java.util.Vector;
 public class Sejour extends Observable{
 
     private int id;
-    private boolean status;
     private Vector<Consommation> listConsommation = new Vector<>();
     private Reservation res;
-    private float prixTotal;
+    private Client client;
+    private Chambre chambre;
     private static int idCounter = 0;
 
-    public Sejour(boolean status, Reservation res, float prixTotal) {
+    public Sejour(Reservation res, Client client) {
         this.id = idCounter++;
-        this.status = status;
         this.res = res;
-        this.prixTotal = prixTotal;
+        this.client = client;
     }
 
     // Getters
     public int getId() {
         return id;
-    }
-
-    public boolean isStatus() {
-        return status;
     }
 
     public Vector<Consommation> getListConsommation() {
@@ -36,8 +31,22 @@ public class Sejour extends Observable{
         return res;
     }
 
-    public float getPrixTotal() {
-        return prixTotal;
+    public double getTotal() {
+        long jours = java.time.temporal.ChronoUnit.DAYS.between(res.getDateDeb(), res.getDateFin());
+        double prixChambre = chambre.getType().getPrix() * jours;
+        double totalConsos = 0;
+        for (Consommation c : listConsommation) {
+            totalConsos += c.getTotal();
+        }
+        return prixChambre + totalConsos;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Chambre getChambre() {
+        return chambre;
     }
 
     // Setters
@@ -45,20 +54,30 @@ public class Sejour extends Observable{
         this.id = id;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     public void setReservation(Reservation res) {
         this.res = res;
-    }
-
-    public void setPrixTotal(float prixTotal) {
-        this.prixTotal = prixTotal;
     }
 
     // Add methods
     public void addConsommation(Consommation c) {
         listConsommation.add(c);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void deleteConsommation(Consommation c) {
+        c.getProduit().setQuantite(c.getProduit().getQuantite() + c.getQuantite());
+        listConsommation.remove(c);
+        setChanged();
+        notifyObservers();
+    }
+
+    public Consommation searchConsommationById(int id) {
+        for (Consommation consommation : listConsommation) {
+            if (consommation.getId() == id) {
+                return consommation;
+            }
+        }
+        return null;
     }
 }

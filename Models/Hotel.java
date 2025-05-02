@@ -13,6 +13,7 @@ public class Hotel extends Observable {
     private Vector<Employe> listEmp = new Vector<Employe>();
     private Vector<Reservation> listRes = new Vector<Reservation>();
     private Vector<RoomType> listTypes = new Vector<RoomType>();
+    private Vector<Sejour> listSejours = new Vector<Sejour>();
 
     public Hotel(String nom, String adresse) {
         this.nom = nom;
@@ -52,14 +53,8 @@ public class Hotel extends Observable {
         return listRes;
     }
 
-    public Vector<Client> getListClientByName(String name) {
-        Vector<Client> filteredList = new Vector<>();
-        for (Client client : listClient) {
-            if (client.getNom().equalsIgnoreCase(name)) {
-                filteredList.add(client);
-            }
-        }
-        return filteredList;
+    public Vector<Sejour> getListSejours() {
+        return listSejours;
     }
 
     public Vector<Chambre> getListChamByType(String type) {
@@ -92,10 +87,6 @@ public class Hotel extends Observable {
         return bannedClients;
     }
 
-    public Vector<Reservation> getReservationArray() {
-        return listRes;
-    }
-
     // Setters
     public void setNom(String nom) {
         this.nom = nom;
@@ -109,9 +100,10 @@ public class Hotel extends Observable {
         listCham.add(chambre);
 
     }
+
     public Chambre findChambreByNumber(int num) {
         for (Chambre c : listCham) {
-            if(c.getNumero() == num) {
+            if (c.getNumero() == num) {
                 return c;
             }
         }
@@ -140,7 +132,8 @@ public class Hotel extends Observable {
         }
     }
 
-    public void updateEmployee(int id, String nom, String prenom, String email, String telephone, String adresse, String password) {
+    public void updateEmployee(int id, String nom, String prenom, String email, String telephone, String adresse,
+            String password) {
         for (Employe emp : getListEmp()) {
             if (emp.getId() == id) {
                 if (nom != null)
@@ -218,14 +211,14 @@ public class Hotel extends Observable {
 
     public int countChambresDisponibles(String type, LocalDate dateDebut, LocalDate dateFin) {
         int totalChambres = 0;
-    
+
         // Nombre total de chambres de ce type
         for (Chambre c : listCham) {
             if (c.getType().getName().equalsIgnoreCase(type)) {
                 totalChambres++;
             }
         }
-    
+
         // Nombre de réservations de ce type qui chevauchent la période
         for (Reservation res : listRes) {
             if (res.getType().getName().equalsIgnoreCase(type)) {
@@ -235,7 +228,7 @@ public class Hotel extends Observable {
                 }
             }
         }
-    
+
         return totalChambres;
     }
 
@@ -246,17 +239,17 @@ public class Hotel extends Observable {
     }
 
     public RoomType findTypeByName(String name) {
-        for(RoomType type : listTypes) {
-            if(type.getName().equalsIgnoreCase(name)){
+        for (RoomType type : listTypes) {
+            if (type.getName().equalsIgnoreCase(name)) {
                 return type;
-            } 
+            }
         }
         return null;
     }
 
     public Reservation findReservationById(int id) {
-        for(Reservation res : listRes) {
-            if(res.getId() == id) {
+        for (Reservation res : listRes) {
+            if (res.getId() == id) {
                 return res;
             }
         }
@@ -315,6 +308,107 @@ public class Hotel extends Observable {
             }
             setChanged();
             notifyObservers("Removed " + toRemove.size() + " expired unclaimed reservations");
+            }
         }
+    public void addSejour(Sejour sejour) {
+        listSejours.add(sejour);
+        setChanged();
+        notifyObservers();
+    }
+
+    public Vector<Reservation> getUpcomingReservations() {
+        Vector<Reservation> result = new Vector<>();
+        for (Reservation res : listRes) {
+            if (!res.getIsCheckedIn() &&
+                    (res.getDateDeb().isBefore(LocalDate.now()) || res.getDateDeb().isEqual(LocalDate.now()))
+                    && !res.getIsCheckedIn()) {
+                result.add(res);
+            }
+        }
+        return result;
+    }
+
+    public Vector<Sejour> getOngoingSejours() {
+        Vector<Sejour> result = new Vector<>();
+        for (Sejour sej : listSejours) {
+            if (!sej.getReservation().getIsCheckedOut()) {
+                result.add(sej);
+            }
+        }
+        return result;
+    }
+
+    public Vector<Reservation> searchReservationsByEmail(Vector<Reservation> list, String mail) {
+        Vector<Reservation> result = new Vector<>();
+        for (Reservation res : list) {
+            if (res.getClientMail().equalsIgnoreCase(mail)) {
+                result.add(res);
+            }
+        }
+        return result;
+    }
+
+    public Vector<Chambre> getAvailableRoomsByType(String Type) {
+        Vector<Chambre> list = getListChamByType(Type);
+        Vector<Chambre> result = new Vector<>();
+        for (Chambre ch : list) {
+            if (ch.isAvailable()) {
+                result.add(ch);
+            }
+        }
+        return result;
+    }
+
+    public Client findClientByEmail(String email) {
+        for (Client client : listClient) {
+            if (client.getEmail().equalsIgnoreCase(email)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    public void addClient(Client client) {
+        listClient.add(client);
+        setChanged();
+        notifyObservers();
+    }
+
+    public Produit searchProductByName(String name) {
+        for (Produit prod : listProd) {
+            if (prod.getNom() == name) {
+                return prod;
+            }
+        }
+        return null;
+    }
+
+    public Vector<Reservation> searchReservationsById(int id) {
+        Vector<Reservation> result = new Vector<>();
+        for (Reservation res : listRes) {
+            if (res.getId() == id) {
+                result.add(res);
+            }
+        }
+        return result;
+    }
+
+    public Sejour searchSejourById(int id) {
+        for(Sejour sejour: listSejours) {
+            if(sejour.getId() == id) {
+                return sejour;
+            }
+        }
+        return null;
+    }
+
+    public Vector<Sejour> searchSejoursByEmail(Vector<Sejour> list, String mail) {
+        Vector<Sejour> result = new Vector<>();
+        for (Sejour res : list) {
+            if (res.getClient().getEmail().equalsIgnoreCase(mail)) {
+                result.add(res);
+            }
+        }
+        return result;
     }
 }

@@ -70,9 +70,4 @@ public class Reservation extends Observable {
     public void setCheckedOut(boolean checkedOut) {
         this.isCheckedOut = checkedOut;
     }
-
-    public boolean datesOverlap(LocalDate existingStart, LocalDate existingEnd, LocalDate newStart,
-            LocalDate newEnd) {
-        return !(newEnd.isBefore(existingStart) || newStart.isAfter(existingEnd));
-    }
 }

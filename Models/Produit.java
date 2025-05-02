@@ -16,6 +16,7 @@ public class Produit extends Observable{
         this.nom = nom;
         this.prixUnit = prixUnit;
         this.quantite = quantite;
+        this.quantite = quantite;
         this.hotel = hotel;
     }
 
