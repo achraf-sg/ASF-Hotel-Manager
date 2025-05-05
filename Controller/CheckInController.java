@@ -1,8 +1,10 @@
 package Controller;
 
 import Models.*;
-import View.CheckInFormPanel;
+import View.CheckInFormPage;
 import View.CheckInPanel;
+import View.UpdateEmployeePage;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,7 +21,6 @@ public class CheckInController {
     this.view = view;
 
     view.remplirTableReservation(model.getUpcomingReservations());
-
 
     // Bouton de recherche par e-mail
     view.getSearchButton().addActionListener(new ActionListener() {
@@ -50,38 +51,29 @@ public class CheckInController {
             view.showError("Réservation introuvable.");
             return;
           }
-
-          res.setCheckedIn(true);
           Vector<Chambre> chambresDisponibles = model.getAvailableRoomsByType(res.getType().getName());
           if (chambresDisponibles.isEmpty()) {
             view.showError("Aucune chambre disponible pour ce type.");
             return;
           }
 
-          CheckInFormPanel formPanel = new CheckInFormPanel(res, chambresDisponibles);
-          JFrame formFrame = new JFrame("Check In");
-          formFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-          formFrame.getContentPane().add(formPanel);
-          formFrame.setSize(800, 600);
-          formFrame.setLocationRelativeTo(null);
+          // Open edit dialog or panel
+          CheckInFormPage checkInForm = new CheckInFormPage(res, chambresDisponibles);
 
-          // Add the controller logic for the validate button
-          formPanel.getValidateButton().addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                  // Your check-in logic here
-              }
+          // Add window listener to refresh the table when update window is closed
+          checkInForm.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+              view.remplirTableReservation(model.getUpcomingReservations());
+            }
           });
 
-          // Add cancel button logic
-          formPanel.getCancelButton().addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                  formFrame.dispose();
-              }
-          });
+          // Position the update window relative to the main frame
+          checkInForm.setLocationRelativeTo(SwingUtilities.getWindowAncestor(view));
 
-          formFrame.setVisible(true);
+          // Create controller and show update page
+          new CheckInFormController(model, checkInForm, res);
+          checkInForm.setVisible(true);
         }
       }
     });
