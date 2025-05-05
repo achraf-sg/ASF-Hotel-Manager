@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
         if (currentUser instanceof Admin) {
             navOptions = Arrays.asList("Dashboard", "Employees", "Reservations", "Rooms", "Products");
         } else if (currentUser instanceof Reception) {
-            navOptions = Arrays.asList("Dashboard", "Reservations", "CheckIn", "Clients");
+            navOptions = Arrays.asList("Dashboard", "Reservations", "CheckIn", "Clients","Stays");
         } else if (currentUser instanceof Menage) {
             navOptions = Arrays.asList("Dashboard", "Cleaning");
         }
@@ -121,6 +121,8 @@ public class MainFrame extends JFrame {
             newPanel = createCleaningPanel();
         } else if (destination.equals("CheckIn") && currentUser instanceof Reception) {
             newPanel = createCheckInPanel();
+        } else if (destination.equals("Stays") && currentUser instanceof Reception) {
+            newPanel = creatSejourPanel();
         } 
         
         if (newPanel != null) {
@@ -200,6 +202,11 @@ public class MainFrame extends JFrame {
     private JPanel createCheckInPanel() {
         CheckInPanel panel = new CheckInPanel(hotel);
         new CheckInController(hotel, panel);
+        return panel;
+    }
+    private JPanel creatSejourPanel() {
+        SejourPanel panel = new SejourPanel(hotel);
+        new SejourPanelController(hotel, panel);
         return panel;
     }
 }

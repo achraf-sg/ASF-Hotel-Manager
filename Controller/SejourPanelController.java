@@ -4,20 +4,16 @@ import Models.Chambre;
 import Models.Consommation;
 import Models.FactureTemplate;
 import Models.Hotel;
-import Models.Reservation;
 import Models.Sejour;
 import View.SejourPanel;
-import View.ConsommationPage;
-import Controller.ConsommationController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class SejourPanelController {
   private Hotel model;
@@ -28,22 +24,22 @@ public class SejourPanelController {
     this.view = view;
 
     view.remplirTableSejours(model.getOngoingSejours());
-    // table listeners
-    view.getTable().addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        int row = view.getTable().rowAtPoint(e.getPoint());
-        int column = view.getTable().columnAtPoint(e.getPoint());
-        // go to consommation
-        if (column == view.getTable.getColumnCount() - 2) {
-          int id = (int) view.getTable().getValueAt(row, 0);
-          Sejour sejour = model.searchSejourById(id);
-          ConsommationPage page = new ConsommationPage();
-          new ConsommationController(model, page, sejour);
-        }
-        // checkOut
-        else if (column == view.getTable.getColumnCount() - 1) {
-          int sejourId = (int) view.getTable().getValueAt(row, 0);
+    //go to consommation
+    view.getSejoursTable().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+              int row = view.getSejoursTable().rowAtPoint(e.getPoint());
+              int column = view.getSejoursTable().columnAtPoint(e.getPoint());
+              
+              if (column == view.getSejoursTable().getColumnCount() - 2) { 
+                int id = (int) view.getSejoursTable().getValueAt(row, 0);
+                Sejour sejour = model.searchSejourById(id);
+               // ConsommationPage page = new ConsommationPage();
+               // new ConsommationController(model, page, sejour);
+              }
+              // checkOut
+        else if (column == view.getSejoursTable().getColumnCount() - 1) {
+          int sejourId = (int) view.getSejoursTable().getValueAt(row, 0);
           Sejour sejour = model.searchSejourById(sejourId);
           if (sejour == null) {
             view.showError("No Ongoing stay found");
@@ -59,8 +55,8 @@ public class SejourPanelController {
             handleCheckout(sejour);
           }
         }
-      }
-    });
+            }
+          });
 
     // search
     view.getSearchButton().addActionListener(new ActionListener() {
@@ -90,7 +86,7 @@ public class SejourPanelController {
 
     // Créer la facture
     FactureTemplate facture = new FactureTemplate(
-        "factures/" + sejour.getClient().getNom() + sejour.getClient().getPrenom() + "_" + LocalDate.now() + ".txt",
+        "Factures/" + sejour.getClient().getNom() + sejour.getClient().getPrenom() + "_" + LocalDate.now() + ".txt",
         sejour.getClient().getNom());
 
     facture.addRoom(

@@ -73,7 +73,7 @@ public class CheckInFormController {
         // Create and associate stays for each client
         for (Client c : clients) {
           Client existingClient = model.findClientByEmail(c.getEmail());
-          Sejour sejour = new Sejour(reservation, c);
+          
 
           if (existingClient != null) {
             if (existingClient.isBanned()) {
@@ -81,25 +81,47 @@ public class CheckInFormController {
               view.dispose();
               return;
             } else {
+              Sejour sejour = new Sejour(reservation, c, chambre);
               existingClient.addSejour(sejour);
+              try {
+                model.addSejour(sejour);
+              } catch (ArrayIndexOutOfBoundsException ex) {
+                view.showError("Please fill in all client fields.");
+                return;
+              }
+              reservation.setCheckedIn(true);
+              view.showMessage("Check-in success !");
+              view.dispose();
             }
-          } else {
+            }
+            else {
+            Sejour sejour = new Sejour(reservation, c, chambre);
             c.addSejour(sejour);
             model.addClient(c);
+            try {
+              model.addSejour(sejour);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+              view.showError("Please fill in all client fields.");
+              return;
+            }
+            reservation.setCheckedIn(true);
+            view.showMessage("Check-in success !");
+            view.dispose();
+          }
             ;
           }
-        }
+        
 
         // Add stay to the global list and remove the reservation
-        try {
-          model.addSejour(new Sejour(reservation, clients.get(0)));
-        } catch (ArrayIndexOutOfBoundsException ex) {
-          view.showError("Please fill in all client fields.");
-          return;
-        }
-        reservation.setCheckedIn(true);
-        view.showMessage("Check-in success !");
-        view.dispose();
+        // try {
+        //   model.addSejour(sejour);
+        // } catch (ArrayIndexOutOfBoundsException ex) {
+        //   view.showError("Please fill in all client fields.");
+        //   return;
+        // }
+        // reservation.setCheckedIn(true);
+        // view.showMessage("Check-in success !");
+        // view.dispose();
       }
     });
 

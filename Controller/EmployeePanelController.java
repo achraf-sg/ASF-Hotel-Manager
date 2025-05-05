@@ -3,13 +3,11 @@ package Controller;
 import Models.*;
 import View.EmployeePanel;
 import View.UpdateEmployeePage;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Vector;
+import javax.swing.*;
 public class EmployeePanelController {
     private Hotel model;
     private Admin admin;
@@ -51,7 +49,12 @@ public class EmployeePanelController {
 
                 // Create employee based on function
                 Employe emp;
+                if(model.isValidEmail(email)&& model.isValidPhoneNumber(telephone)&& model.isValidName(nom)&& model.isValidName(prenom)) {
+                    
+
+               
                 if (function.equals("Receptionist")) {
+                    
                     emp = new Reception(nom, prenom, adresse, telephone, email, model, password);
                 } else {
                     emp = new Menage(nom, prenom, adresse, telephone, email, model, password);
@@ -62,6 +65,10 @@ public class EmployeePanelController {
                 view.showMessage("Employee added successfully!");
                 view.clearForm();
                 view.remplirTableEmployes(model.getListEmp());
+            } else {
+                    view.showError("Invalid  informations format!");
+                    view.clearForm();
+                }
             }
         });
     }

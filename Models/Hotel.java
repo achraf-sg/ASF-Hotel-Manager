@@ -410,4 +410,19 @@ public class Hotel extends Observable {
         }
         return result;
     }
+    public boolean isValidEmail(String email) {
+        return email != null && email.matches("^[^@\\s]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$");
+    }
+    public boolean isValidPhoneNumber(String phone) {
+        return phone != null && phone.matches("^[0-9]{10}$");//
+    }
+    
+    public boolean isValidName(String name) {
+        return name != null && name.matches("^[a-zA-Z]+$");
+    }
+
+
+
+
+
 }

@@ -12,7 +12,8 @@ public class Sejour extends Observable{
     private Chambre chambre;
     private static int idCounter = 0;
 
-    public Sejour(Reservation res, Client client) {
+    public Sejour(Reservation res, Client client, Chambre chambre) {
+        this.chambre = chambre;
         this.id = idCounter++;
         this.res = res;
         this.client = client;
