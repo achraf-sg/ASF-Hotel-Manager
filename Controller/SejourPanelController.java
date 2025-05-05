@@ -101,7 +101,7 @@ public class SejourPanelController {
     facture.createTextFile();
 
     // Supprimer le séjour
-    view.showMessage("Checkout réussi. Facture générée.");
+    view.showMessage(" Check-out success !\n" +"Your invoice has been generated in the Factures folder");
     view.remplirTableSejours(model.getOngoingSejours());
   }
 

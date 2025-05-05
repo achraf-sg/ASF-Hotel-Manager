@@ -3,8 +3,6 @@ package Controller;
 import Models.*;
 import View.CheckInFormPage;
 import View.CheckInPanel;
-import View.UpdateEmployeePage;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -48,12 +46,12 @@ public class CheckInController {
           Reservation res = model.findReservationById(reservationId);
 
           if (res == null) {
-            view.showError("Réservation introuvable.");
+            view.showError(" Reservation not found.");
             return;
           }
           Vector<Chambre> chambresDisponibles = model.getAvailableRoomsByType(res.getType().getName());
           if (chambresDisponibles.isEmpty()) {
-            view.showError("Aucune chambre disponible pour ce type.");
+            view.showError(" No available rooms of this type.");
             return;
           }
 

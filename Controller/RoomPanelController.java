@@ -32,7 +32,9 @@ public class RoomPanelController {
                     // Validate that room doesn't already exist
                     boolean exists = false;
                     for (Chambre c : model.getListCham()) {
-                        if (c.getNumero() == numero && c.getEtage() == etage) {
+
+                        
+                        if (c.getNumero() == numero && c.getEtage() == etage ) {
                             exists = true;
                             break;
                         }
@@ -42,12 +44,16 @@ public class RoomPanelController {
                         view.showError("This room already exists!");
                         return;
                     }
-
+if (numero <= 0 || etage <= 0) {
+                        view.showError("Room number and floor must be positive integers!");
+                        return;
+                    }
                     // Add the room
                     model.addChambre(numero, etage, type);
                     view.populateRoomTable(model.getListCham());
                     view.showMessage("Room added successfully!");
                     view.clearForm();
+                    
                 } catch (NumberFormatException ex) {
                     view.showError("Room number and floor must be numeric values!");
                 }

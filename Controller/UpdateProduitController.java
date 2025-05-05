@@ -65,8 +65,8 @@ public class UpdateProduitController {
             int qte = Integer.parseInt(view.getQuantiteField().getText());
 
             // Ensure quantity is positive
-            if (qte < 0) {
-                view.showError("La quantité ne peut pas être négative !");
+            if (qte < 0 || prixUnit < 0) {
+                view.showError("The quantity and price must be positive values!");
                 return;
             }
 
@@ -75,7 +75,7 @@ public class UpdateProduitController {
             produit.setPrixUnit(prixUnit);
             produit.setQuantite(qte);
 
-            view.showMessage("Produit mis à jour avec succès !");
+            view.showMessage(" Product updated successfully!");
             
             // Refresh the table in the main view
             if (mainView != null) {
@@ -85,7 +85,7 @@ public class UpdateProduitController {
             view.dispose(); // Close the update page
 
         } catch (NumberFormatException ex) {
-            view.showError("Veuillez entrer des valeurs valides pour le prix et la quantité !");
+            view.showError(" Please enter valid numeric values for price and quantity!");
         }
     }
 }

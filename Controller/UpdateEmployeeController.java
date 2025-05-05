@@ -66,7 +66,7 @@ public class UpdateEmployeeController {
     model.updateEmployee(employe.getId(), nom, prenom, email, telephone, adresse, password);
 
     // Afficher un message de succès et fermer la page
-    view.showMessage("Employé mis à jour avec succès !");
+    view.showMessage("Employee updated successfully!");
     
     view.dispose();
   }
