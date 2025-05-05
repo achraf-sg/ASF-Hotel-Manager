@@ -73,12 +73,4 @@ public class Sejour extends Observable{
         notifyObservers();
     }
 
-    public Consommation searchConsommationById(int id) {
-        for (Consommation consommation : listConsommation) {
-            if (consommation.getId() == id) {
-                return consommation;
-            }
-        }
-        return null;
-    }
 }
