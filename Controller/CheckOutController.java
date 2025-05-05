@@ -1,7 +1,7 @@
 // package Controller;
 
 // import Models.*;
-// import View.CheckoutPage;
+// import View.CheckoutPanel;
 
 // import javax.swing.*;
 // import java.awt.event.ActionEvent;
@@ -14,11 +14,13 @@
 // public class CheckOutController {
 
 //   private Hotel model;
-//   private CheckoutPage view;
+//   private CheckoutPanel view;
 
-//   public CheckOutController(Hotel model, CheckoutPage view) {
+//   public CheckOutController(Hotel model, CheckoutPanel view) {
 //     this.model = model;
 //     this.view = view;
+
+//     view.remplirTableSejours(model.getOngoingSejours());
 
 //     initTableListeners();
 
@@ -87,7 +89,7 @@
 
 //     // Supprimer le séjour
 //     view.showMessage("Checkout réussi. Facture générée.");
-//     view.remplirTableSejours(model.getListSejours());
+//     view.remplirTableSejours(model.getOngoingSejours());
 //   }
 
 // }
