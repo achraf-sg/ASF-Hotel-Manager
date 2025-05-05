@@ -77,4 +77,8 @@ public class Employe extends Observable{
         this.password = password;
     }
 
+   
+
+
+
 }
