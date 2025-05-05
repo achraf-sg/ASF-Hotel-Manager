@@ -1,7 +1,7 @@
 package Controller;
 
 import Models.*;
-import View.CheckInFormPanel;
+import View.CheckInFormPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -9,10 +9,10 @@ import javax.swing.*;
 
 public class CheckInFormController {
   private Hotel model;
-  private CheckInFormPanel view;
+  private CheckInFormPage view;
   private Reservation reservation;
 
-  public CheckInFormController(Hotel model, CheckInFormPanel view, Reservation reservation) {
+  public CheckInFormController(Hotel model, CheckInFormPage view, Reservation reservation) {
     this.model = model;
     this.view = view;
     this.reservation = reservation;
@@ -24,13 +24,15 @@ public class CheckInFormController {
     view.getValidateButton().addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        String numStr = (String) view.getRoomComboBox().getSelectedItem();
+        System.out.println("Validate button clicked!");
+        String numStr = view.getRoomComboBox().getSelectedItem().toString();
         if (numStr == null || numStr.isEmpty()) {
           view.showError("Please select a room number.");
           return;
         }
 
-        int numero = Integer.parseInt(numStr);
+        int numero = Integer.parseInt(numStr.split(" ")[1]);
+        System.out.println(numero);
         Chambre chambre = model.findChambreByNumber(numero);
         if (chambre == null) {
           view.showError("Error: Room not found.");
@@ -41,23 +43,22 @@ public class CheckInFormController {
         // Retrieve client information dynamically
         Vector<Client> clients = new Vector<>();
         for (int i = 0; i < maxClients; i++) {
-          try{
-          JTextField nameField = view.getClientNameField(i);
-          JTextField surnameField = view.getClientSurnameField(i);
-          JTextField emailField = view.getClientEmailField(i);
-          JTextField addressField = view.getClientAddressField(i);
-          JTextField phoneField = view.getClientPhoneField(i);
+          try {
+            JTextField nameField = view.getClientNameField(i);
+            JTextField surnameField = view.getClientSurnameField(i);
+            JTextField emailField = view.getClientEmailField(i);
+            JTextField phoneField = view.getClientPhoneField(i);
 
-          if (nameField != null && !nameField.getText().isEmpty()) {
-            Client client = new Client(
-                nameField.getText(),
-                surnameField.getText(),
-                phoneField.getText(),
-                emailField.getText(),
-                model);
-            clients.add(client);
-          }}
-          catch (NullPointerException ex){
+            if (nameField != null && !nameField.getText().isEmpty()) {
+              Client client = new Client(
+                  nameField.getText(),
+                  surnameField.getText(),
+                  phoneField.getText(),
+                  emailField.getText(),
+                  model);
+              clients.add(client);
+            }
+          } catch (NullPointerException ex) {
             view.showError("Please fill in all client fields.");
             return;
           }
@@ -75,16 +76,37 @@ public class CheckInFormController {
           Sejour sejour = new Sejour(reservation, c);
 
           if (existingClient != null) {
-            existingClient.addSejour(sejour);
+            if (existingClient.isBanned()) {
+              view.showError("Client banned, unable to check-in");
+              view.dispose();
+              return;
+            } else {
+              existingClient.addSejour(sejour);
+            }
           } else {
             c.addSejour(sejour);
-            model.addClient(c);;
+            model.addClient(c);
+            ;
           }
         }
 
         // Add stay to the global list and remove the reservation
-        model.addSejour(new Sejour(reservation, clients.get(0)));
+        try {
+          model.addSejour(new Sejour(reservation, clients.get(0)));
+        } catch (ArrayIndexOutOfBoundsException ex) {
+          view.showError("Please fill in all client fields.");
+          return;
+        }
+        reservation.setCheckedIn(true);
         view.showMessage("Check-in success !");
+        view.dispose();
+      }
+    });
+
+    view.getCancelButton().addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        view.dispose();
       }
     });
   }

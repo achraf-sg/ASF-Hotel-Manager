@@ -42,7 +42,7 @@ public class CheckInPanel extends JPanel {
         reservationTable.setFont(StyleConfig.NORMAL_FONT);
 
         // Populate table with upcoming reservations
-        remplirTableReservation(hotel.getUpcomingReservations());
+        // remplirTableReservation(hotel.getUpcomingReservations());
 
         JScrollPane scrollPane = new JScrollPane(reservationTable);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -80,7 +80,6 @@ public class CheckInPanel extends JPanel {
         tableModel.setRowCount(0); // Clear the table
 
         for (Reservation reservation : reservations) {
-            if (!reservation.getIsCheckedIn()) { // Only show reservations that haven't been checked in
                 tableModel.addRow(new Object[]{
                     reservation.getId(),
                     reservation.getDateDeb(),
@@ -90,7 +89,6 @@ public class CheckInPanel extends JPanel {
                     "Check In" // Placeholder for check in button
                 });
             }
-        }
     }
 
     // Show error message
