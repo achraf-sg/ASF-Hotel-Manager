@@ -320,11 +320,10 @@ public class Hotel extends Observable {
         Vector<Reservation> result = new Vector<>();
         for (Reservation res : listRes) {
             if (!res.getIsCheckedIn() &&
-                    (res.getDateDeb().isBefore(LocalDate.now()) || res.getDateDeb().isEqual(LocalDate.now()))
-                    && !res.getIsCheckedIn()) {
-                result.add(res);
+                    (res.getDateDeb().isBefore(LocalDate.now()) || res.getDateDeb().isEqual(LocalDate.now()))) {
+                        result.add(res);
+                    }
             }
-        }
         return result;
     }
 

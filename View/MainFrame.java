@@ -1,11 +1,11 @@
 package View;
 
+import Controller.*;
 import Models.*;
 import java.awt.*;
-import javax.swing.*;
 import java.util.*;
-import Controller.*;
 import java.util.List;
+import javax.swing.*;
 
 
 public class MainFrame extends JFrame {
@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
         if (currentUser instanceof Admin) {
             navOptions = Arrays.asList("Dashboard", "Employees", "Reservations", "Rooms", "Products");
         } else if (currentUser instanceof Reception) {
-            navOptions = Arrays.asList("Dashboard", "Reservations", "Clients");
+            navOptions = Arrays.asList("Dashboard", "Reservations", "CheckIn", "Clients");
         } else if (currentUser instanceof Menage) {
             navOptions = Arrays.asList("Dashboard", "Cleaning");
         }
@@ -119,7 +119,9 @@ public class MainFrame extends JFrame {
             newPanel = createClientPanel();
         } else if (destination.equals("Cleaning") && currentUser instanceof Menage) {
             newPanel = createCleaningPanel();
-        }
+        } else if (destination.equals("CheckIn") && currentUser instanceof Reception) {
+            newPanel = createCheckInPanel();
+        } 
         
         if (newPanel != null) {
             contentPanel.add(newPanel, BorderLayout.CENTER);
@@ -192,6 +194,12 @@ public class MainFrame extends JFrame {
     private JPanel createCleaningPanel() {
         MenagePanel panel = new MenagePanel(hotel);
         new CleaningPanelController(hotel, panel);
+        return panel;
+    }
+    
+    private JPanel createCheckInPanel() {
+        CheckInPanel panel = new CheckInPanel(hotel);
+        new CheckInController(hotel, panel);
         return panel;
     }
 }

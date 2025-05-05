@@ -1,19 +1,18 @@
 package Controller;
 
 import Models.*;
-import View.CheckInFormPage;
-
-import javax.swing.*;
+import View.CheckInFormPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+import javax.swing.*;
 
 public class CheckInFormController {
   private Hotel model;
-  private CheckInFormPage view;
+  private CheckInFormPanel view;
   private Reservation reservation;
 
-  public CheckInFormController(Hotel model, CheckInFormPage view, Reservation reservation) {
+  public CheckInFormController(Hotel model, CheckInFormPanel view, Reservation reservation) {
     this.model = model;
     this.view = view;
     this.reservation = reservation;
@@ -86,7 +85,6 @@ public class CheckInFormController {
         // Add stay to the global list and remove the reservation
         model.addSejour(new Sejour(reservation, clients.get(0)));
         view.showMessage("Check-in success !");
-        view.dispose();
       }
     });
   }
