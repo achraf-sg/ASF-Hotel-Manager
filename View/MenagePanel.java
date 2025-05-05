@@ -1,12 +1,12 @@
 package View;
 
+import Models.Chambre;
+import Models.Hotel;
+import java.awt.*;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.util.Vector;
-import Models.Chambre;
-import Models.Hotel;
 
 public class MenagePanel extends JPanel {
     private JTable cleaningTable;
@@ -39,7 +39,7 @@ public class MenagePanel extends JPanel {
         cleaningTable = new JTable(model);
         cleaningTable.setRowHeight(40);
         cleaningTable.setFont(StyleConfig.NORMAL_FONT);
-
+        cleaningTable.getTableHeader().setReorderingAllowed(false);
         // Populate table
         showTable(hotel.getListCham());
 

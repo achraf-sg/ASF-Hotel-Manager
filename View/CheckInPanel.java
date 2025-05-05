@@ -40,7 +40,7 @@ public class CheckInPanel extends JPanel {
         reservationTable = new JTable(model);
         reservationTable.setRowHeight(40);
         reservationTable.setFont(StyleConfig.NORMAL_FONT);
-
+        reservationTable.getTableHeader().setReorderingAllowed(false);
         // Populate table with upcoming reservations
         // remplirTableReservation(hotel.getUpcomingReservations());
 

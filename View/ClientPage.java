@@ -9,7 +9,7 @@
 
 // public class ClientPage extends JFrame {
 //     private JTable clientTable;
-
+   
 //     public ClientPage(Vector<Client> clients) {
 //         setTitle("Client Management");
 //         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

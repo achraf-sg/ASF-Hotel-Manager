@@ -1,12 +1,12 @@
 package View;
 
+import Models.Client;
+import Models.Hotel;
+import java.awt.*;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.util.Vector;
-import Models.Client;
-import Models.Hotel;
 
 public class ClientPanel extends JPanel {
     private JTable clientTable;
@@ -37,7 +37,7 @@ public class ClientPanel extends JPanel {
         clientTable = new JTable(model);
         clientTable.setRowHeight(40);
         clientTable.setFont(StyleConfig.NORMAL_FONT);
-
+        clientTable.getTableHeader().setReorderingAllowed(false);
         // Populate table
         populateClientTable(hotel.getListClient());
 

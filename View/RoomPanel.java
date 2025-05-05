@@ -1,13 +1,13 @@
 package View;
 
+import Models.Chambre;
+import Models.Hotel;
+import Models.RoomType;
+import java.awt.*;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import Models.Chambre;
-import Models.RoomType;
-import Models.Hotel;
-import java.util.Vector;
 
 public class RoomPanel extends JPanel {
     private JTable roomTable;
@@ -42,7 +42,7 @@ public class RoomPanel extends JPanel {
         roomTable = new JTable(model);
         roomTable.setRowHeight(40);
         roomTable.setFont(StyleConfig.NORMAL_FONT);
-
+        roomTable.getTableHeader().setReorderingAllowed(false);
         // Populate table
         populateRoomTable(hotel.getListCham());
 

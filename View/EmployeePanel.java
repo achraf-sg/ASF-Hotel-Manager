@@ -1,16 +1,15 @@
 package View;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import java.awt.*;
-import java.util.Vector;
 import Models.Employe;
 import Models.Hotel;
 import Models.Menage;
 import Models.Reception;
+import java.awt.*;
+import java.util.Vector;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class EmployeePanel extends JPanel {
     private JTable employeeTable;
@@ -52,7 +51,7 @@ public class EmployeePanel extends JPanel {
         employeeTable = new JTable(model);
         employeeTable.setRowHeight(40);
         employeeTable.setFont(StyleConfig.NORMAL_FONT);
-        
+         employeeTable.getTableHeader().setReorderingAllowed(false); 
         // Customize table rendering
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);

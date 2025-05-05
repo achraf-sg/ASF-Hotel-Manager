@@ -1,12 +1,12 @@
 package View;
 
+import Models.Hotel;
+import Models.Produit;
+import java.awt.*;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import Models.Produit;
-import Models.Hotel;
-import java.util.Vector;
 
 public class ProduitPanel extends JPanel {
     private JTable produitTable;
@@ -39,7 +39,7 @@ public class ProduitPanel extends JPanel {
         produitTable = new JTable(model);
         produitTable.setRowHeight(40);
         produitTable.setFont(StyleConfig.NORMAL_FONT);
-
+        produitTable.getTableHeader().setReorderingAllowed(false);
         // Populate table
         populateProduitTable(hotel.getListProd());
 

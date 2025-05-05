@@ -1,16 +1,16 @@
 package View;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
+import Models.Hotel;
+import Models.Reservation;
+import Models.RoomType;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import Models.Hotel;
-import Models.RoomType;
-import Models.Reservation;
 import java.util.Vector;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class ReservationPanel extends JPanel {
     private JTable reservationTable;
@@ -46,7 +46,7 @@ public class ReservationPanel extends JPanel {
         reservationTable = new JTable(model);
         reservationTable.setRowHeight(40);
         reservationTable.setFont(StyleConfig.NORMAL_FONT);
-
+        reservationTable.getTableHeader().setReorderingAllowed(false);
         // Populate table
         populateReservationTable(hotel.getListRes());
 

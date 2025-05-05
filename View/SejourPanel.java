@@ -40,7 +40,7 @@ public class SejourPanel extends JPanel {
         SejourTable = new JTable(model);
         SejourTable.setRowHeight(40);
         SejourTable.setFont(StyleConfig.NORMAL_FONT);
-
+        SejourTable.getTableHeader().setReorderingAllowed(false);
         // Populate table with upcoming reservations
         //RemplireTableSejour(hotel.getOngoingSejours());
 

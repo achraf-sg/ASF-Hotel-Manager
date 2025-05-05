@@ -1,6 +1,5 @@
 package View;
 import java.awt.*;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
@@ -45,7 +44,7 @@ public class StyleConfig {
         header.setForeground(Color.WHITE); // Header text color
         header.setFont(StyleConfig.HEADER_FONT); // Header font
         header.setReorderingAllowed(false); // Disable column reordering
-    
+          header.setResizingAllowed(false); 
         // Set cell renderers for better appearance
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
