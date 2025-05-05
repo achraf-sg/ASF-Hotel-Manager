@@ -1,9 +1,0 @@
-========== HOTEL INVOICE ==========
-Client: erzcaez
-Date: 2025-05-05
-
----- Room Bill ----
-Room Number: 104, Price: 100.0€/night
-
-TOTAL: 0,00€
-=====================================
