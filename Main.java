@@ -1,6 +1,6 @@
+import Controller.*;
 import Models.*;
 import View.*;
-import Controller.*;
 import javax.swing.SwingUtilities;
 
 public class Main {
