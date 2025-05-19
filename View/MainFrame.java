@@ -48,9 +48,9 @@ public class MainFrame extends JFrame {
         // Create navigation items and their actions
         List<String> navOptions = new ArrayList<>();
         if (currentUser instanceof Admin) {
-            navOptions = Arrays.asList("Dashboard", "Employees", "Reservations", "Rooms", "Products");
+            navOptions = Arrays.asList("Dashboard", "Employees","Clients", "Reservations", "Rooms", "Products");
         } else if (currentUser instanceof Reception) {
-            navOptions = Arrays.asList("Dashboard", "Reservations", "CheckIn", "Clients","Stays");
+            navOptions = Arrays.asList("Dashboard", "Reservations", "CheckIn","Stays");
         } else if (currentUser instanceof Menage) {
             navOptions = Arrays.asList("Dashboard", "Cleaning");
         }
@@ -88,7 +88,7 @@ public class MainFrame extends JFrame {
             newPanel = createRoomPanel();
         } else if (destination.equals("Products") && currentUser instanceof Admin) {
             newPanel = createProductPanel();
-        } else if (destination.equals("Clients") && currentUser instanceof Reception) {
+        } else if (destination.equals("Clients") && currentUser instanceof Admin) {
             newPanel = createClientPanel();
         } else if (destination.equals("Cleaning") && currentUser instanceof Menage) {
             newPanel = createCleaningPanel();

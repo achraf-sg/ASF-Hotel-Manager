@@ -49,7 +49,8 @@ public class CheckInFormController {
             JTextField emailField = view.getClientEmailField(i);
             JTextField phoneField = view.getClientPhoneField(i);
 
-            if (nameField != null && !nameField.getText().isEmpty()) {
+            if (nameField != null && !nameField.getText().isEmpty()&& model.isValidName(nameField.getText()) &&
+                 surnameField != null && !surnameField.getText().isEmpty()&& model.isValidName(surnameField.getText()) &&phoneField != null && !phoneField.getText().isEmpty()&& model.isValidPhoneNumber(phoneField.getText())) {
               Client client = new Client(
                   nameField.getText(),
                   surnameField.getText(),
@@ -57,6 +58,10 @@ public class CheckInFormController {
                   emailField.getText(),
                   model);
               clients.add(client);
+            }else {
+              view.showError("Please fill in all client fields correctly.");
+              
+return;
             }
           } catch (NullPointerException ex) {
             view.showError("Please fill in all client fields.");

@@ -65,7 +65,7 @@ public class ReservationPanelController {
                     String email = view.getEmailField().getText();
                     
                     // Validate email
-                    if (email == null || email.isEmpty()) {
+                    if (email == null || email.isEmpty() || !model.isValidEmail(email)) {
                         view.showError("Please enter a client email!");
                         return;
                     }
