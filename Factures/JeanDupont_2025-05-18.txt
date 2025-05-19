@@ -1,0 +1,14 @@
+========== HOTEL INVOICE ==========
+Client: Jean
+Date: 2025-05-18
+
+---- Room Bill ----
+Room Number: 101, Price: 180.0€/night
+
+---- Bar Charges ----
+Product              Quantity   Price     
+------------------------------------------
+Evian Water 500ml    7          31,50€    
+
+TOTAL: 31,50€
+=====================================

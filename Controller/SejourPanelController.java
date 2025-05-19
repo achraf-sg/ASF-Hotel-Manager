@@ -6,6 +6,7 @@ import Models.FactureTemplate;
 import Models.Hotel;
 import Models.Sejour;
 import View.SejourPanel;
+import View.ConsommationPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -34,8 +35,9 @@ public class SejourPanelController {
               if (column == view.getSejoursTable().getColumnCount() - 2) { 
                 int id = (int) view.getSejoursTable().getValueAt(row, 0);
                 Sejour sejour = model.searchSejourById(id);
-               // ConsommationPage page = new ConsommationPage();
-               // new ConsommationController(model, page, sejour);
+                ConsommationPage page = new ConsommationPage(model);
+                new ConsommationController(model, page, sejour);
+                page.setVisible(true);
               }
               // checkOut
         else if (column == view.getSejoursTable().getColumnCount() - 1) {
@@ -101,7 +103,7 @@ public class SejourPanelController {
     facture.createTextFile();
 
     // Supprimer le séjour
-    view.showMessage(" Check-out success !\n" +"Your invoice has been generated in the Factures folder");
+    view.showMessage("Checkout succes, find the receipt in the receipts folder");
     view.remplirTableSejours(model.getOngoingSejours());
   }
 

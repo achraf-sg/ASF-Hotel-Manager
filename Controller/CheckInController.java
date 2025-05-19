@@ -46,12 +46,12 @@ public class CheckInController {
           Reservation res = model.findReservationById(reservationId);
 
           if (res == null) {
-            view.showError(" Reservation not found.");
+            view.showError("Reservation not found");
             return;
           }
           Vector<Chambre> chambresDisponibles = model.getAvailableRoomsByType(res.getType().getName());
           if (chambresDisponibles.isEmpty()) {
-            view.showError(" No available rooms of this type.");
+            view.showError("There are no available rooms for the moment");
             return;
           }
 

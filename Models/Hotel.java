@@ -375,7 +375,7 @@ public class Hotel extends Observable {
 
     public Produit searchProductByName(String name) {
         for (Produit prod : listProd) {
-            if (prod.getNom() == name) {
+            if (prod.getNom().equalsIgnoreCase(name)) {
                 return prod;
             }
         }
@@ -421,8 +421,12 @@ public class Hotel extends Observable {
         return name != null && name.matches("^[a-zA-Z]+$");
     }
 
-
-
-
-
+    public Consommation searchConsommationById(Vector<Consommation> list, int id) {
+        for (Consommation consommation : list) {
+            if (consommation.getId() == id) {
+                return consommation;
+            }
+        }
+        return null;
+    }
 }
